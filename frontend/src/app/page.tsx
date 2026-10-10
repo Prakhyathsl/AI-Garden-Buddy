@@ -27,7 +27,7 @@ export default function LandingPage() {
         <div className="relative max-w-3xl space-y-6">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-medium text-[#74c69d]">
             <Sparkles className="w-3.5 h-3.5" />
-            Hacktoberfest 2026 Submission — Best Use of Gemma
+            Hacktoberfest 2026 — Best Use of Gemma
           </div>
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
@@ -37,8 +37,8 @@ export default function LandingPage() {
           </h1>
 
           <p className="text-lg sm:text-xl text-[#cad2c5] leading-relaxed max-w-2xl">
-            A practical, privacy-conscious garden companion powered by Google&apos;s open-weight <strong>Gemma 2</strong> model.
-            Get personalized weekly planting schedules and diagnostic care—designed to help you spend less time on screens and more time with living soil.
+            A practical, privacy-conscious garden companion powered by Google&apos;s open-weight <strong>Gemma</strong> models.
+            Personalized weekly planting schedules and diagnostic care designed to help you spend less time on screens and more time in nature.
           </p>
 
           <div className="flex flex-wrap items-center gap-4 pt-4">
@@ -47,7 +47,7 @@ export default function LandingPage() {
               className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-[#74c69d] text-[#132a22] font-semibold hover:bg-[#52b788] transition-all shadow-md hover:shadow-lg"
             >
               <Sparkles className="w-5 h-5" />
-              Generate Your Garden Plan
+              Create Garden Plan
               <ArrowRight className="w-4 h-4" />
             </Link>
 
@@ -56,22 +56,22 @@ export default function LandingPage() {
               className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-medium border border-white/20 backdrop-blur-sm transition-all"
             >
               <Sprout className="w-5 h-5 text-[#74c69d]" />
-              View Sample Balcony Garden
+              Explore Dashboard
             </Link>
           </div>
 
           <div className="pt-6 flex flex-wrap items-center gap-6 text-xs text-[#cad2c5]/80 border-t border-white/15">
             <div className="flex items-center gap-1.5">
               <ShieldCheck className="w-4 h-4 text-[#74c69d]" />
-              <span>Runs 100% locally via Ollama or cloud API</span>
+              <span>Google AI Studio or Local Ollama</span>
             </div>
             <div className="flex items-center gap-1.5">
               <Sun className="w-4 h-4 text-[#dda15e]" />
-              <span>Microclimate & Live Weather Grounding</span>
+              <span>Live Microclimate Weather Grounding</span>
             </div>
             <div className="flex items-center gap-1.5">
               <Eye className="w-4 h-4 text-[#74c69d]" />
-              <span>No user account or tracking required</span>
+              <span>Private & Client-Side Stored</span>
             </div>
           </div>
         </div>

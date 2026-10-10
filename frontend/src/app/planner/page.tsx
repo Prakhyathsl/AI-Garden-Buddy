@@ -93,14 +93,14 @@ export default function PlannerPage() {
         <div>
           <div className="flex items-center gap-2">
             <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-[#1b4332]">
-              <Sparkles className="w-3.5 h-3.5 text-[#2d6a4f]" /> Core Gemma 2 Engine
+              <Sparkles className="w-3.5 h-3.5 text-[#2d6a4f]" /> Powered by Gemma
             </span>
           </div>
           <h1 className="text-3xl font-extrabold text-[#1b4332] mt-1">
             AI Weekly Garden Planner
           </h1>
           <p className="text-sm text-gray-600 mt-1">
-            Synthesizes your microclimate, container space, and sunlight into a structured 7-day screen-free schedule.
+            Generates a structured 7-day schedule with daily screen-free outdoor missions tailored to your space.
           </p>
         </div>
 
@@ -118,11 +118,11 @@ export default function PlannerPage() {
 
       {/* Generator Form Controls */}
       <div className="garden-card p-6 bg-white border border-[#e8ebe4] space-y-5 print:hidden">
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-          <div className="space-y-1">
-            <h3 className="font-bold text-[#1b4332] text-base">Plan Parameters</h3>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#f0f2ed] pb-3">
+          <div className="space-y-0.5">
+            <h3 className="font-bold text-[#1b4332] text-sm">Garden Constraints</h3>
             <p className="text-xs text-gray-500">
-              Active space: <strong>{profile?.garden_name}</strong> ({profile?.space_sq_ft} sq ft, {profile?.containers_count} pots, {profile?.sunlight_exposure?.replace('_', ' ')} in {profile?.location})
+              {profile?.garden_name} • {profile?.space_sq_ft} sq ft • {profile?.containers_count} containers • {profile?.sunlight_exposure?.replace('_', ' ')} • {profile?.location}
             </p>
           </div>
 
@@ -130,11 +130,11 @@ export default function PlannerPage() {
             href="/profile"
             className="text-xs font-semibold text-[#2d6a4f] hover:underline"
           >
-            Adjust Space Settings →
+            Edit Space Settings →
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-1">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
           <div>
             <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">
               Planning Horizon
@@ -159,24 +159,9 @@ export default function PlannerPage() {
               type="text"
               value={customFocus}
               onChange={(e) => setCustomFocus(e.target.value)}
-              placeholder="e.g. repotting, pest deterrence, seed propagation"
+              placeholder="e.g. repotting, companion planting, seed propagation"
               className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d6a4f]"
             />
-          </div>
-
-          <div className="flex flex-col justify-end">
-            <label className="flex items-center gap-2 cursor-pointer p-2.5 rounded-xl border border-dashed border-[#84a98c] bg-[#fbfbf7] hover:bg-[#f4f4ea] transition-all">
-              <input
-                type="checkbox"
-                checked={useSampleData}
-                onChange={(e) => setUseSampleData(e.target.checked)}
-                className="w-4 h-4 accent-[#2d6a4f] rounded"
-              />
-              <div className="flex flex-col text-left">
-                <span className="text-xs font-bold text-[#1b4332]">Use Verified Sample Demo Data</span>
-                <span className="text-[10px] text-gray-500">Test UI immediately without starting Ollama</span>
-              </div>
-            </label>
           </div>
         </div>
 
@@ -192,16 +177,14 @@ export default function PlannerPage() {
               {loading ? 'Synthesizing with Gemma...' : plan ? 'Regenerate 7-Day Plan' : 'Generate 7-Day Plan'}
             </button>
 
-            {!useSampleData && (
-              <button
-                type="button"
-                onClick={() => handleGenerate(true)}
-                disabled={loading}
-                className="text-xs font-medium text-[#52796f] hover:text-[#1b4332] underline"
-              >
-                Instant Demo Fixture
-              </button>
-            )}
+            <button
+              type="button"
+              onClick={() => handleGenerate(true)}
+              disabled={loading}
+              className="text-xs font-medium text-[#52796f] hover:text-[#1b4332] underline"
+            >
+              Preview Sample Plan
+            </button>
           </div>
 
           {saveToast && (
@@ -219,7 +202,7 @@ export default function PlannerPage() {
             <Sparkles className="w-8 h-8 text-[#2d6a4f] animate-spin" />
           </div>
           <div className="space-y-1">
-            <h3 className="text-lg font-bold text-[#1b4332]">Gemma 2 Horticultural Reasoning</h3>
+            <h3 className="text-lg font-bold text-[#1b4332]">Synthesizing Garden Plan</h3>
             <p className="text-xs text-gray-600 font-mono tracking-tight">{activeStepText}</p>
           </div>
           <div className="max-w-md mx-auto h-2 bg-[#e8ebe4] rounded-full overflow-hidden">
@@ -228,36 +211,25 @@ export default function PlannerPage() {
         </div>
       )}
 
-      {/* Error State with Recovery Guidance */}
+      {/* Error State with Clean Recovery Guidance */}
       {error && !loading && (
-        <div className="p-6 rounded-2xl bg-rose-50 border border-rose-200 text-rose-900 space-y-3">
+        <div className="p-6 rounded-2xl bg-amber-50/80 border border-amber-200 text-amber-950 space-y-3">
           <div className="flex items-center gap-2">
-            <AlertCircle className="w-5 h-5 text-rose-600" />
-            <h3 className="text-sm font-bold">Gemma Inference Unreachable</h3>
+            <AlertCircle className="w-5 h-5 text-amber-600" />
+            <h3 className="text-sm font-bold">Gemma Inference Service Unavailable</h3>
           </div>
-          <p className="text-xs leading-relaxed text-rose-800 font-mono bg-white/70 p-3 rounded-lg border border-rose-200">
+          <p className="text-xs leading-relaxed text-amber-900 bg-white/70 p-3 rounded-lg border border-amber-200 font-mono">
             {error}
           </p>
-          <div className="text-xs space-y-2 pt-1 text-rose-800">
-            <p className="font-semibold">How to resolve:</p>
-            <ul className="list-disc list-inside space-y-1">
-              <li>
-                <strong>Local Ollama:</strong> Ensure Ollama is running (<code>ollama serve</code>) and you have pulled Gemma (<code>ollama run gemma2:9b</code>).
-              </li>
-              <li>
-                <strong>Cloud API:</strong> Provide a <code>GROQ_API_KEY</code> with access to <code>gemma2-9b-it</code> in <code>.env</code>.
-              </li>
-              <li>
-                <strong>Instant Demo:</strong> Click below to view the verified demo plan without launching external models.
-              </li>
-            </ul>
-          </div>
-          <div className="pt-2">
+          <p className="text-xs text-amber-800">
+            To enable real-time inference, ensure <code>GEMINI_API_KEY</code> is configured in <code>.env</code> (Google AI Studio) or start local Ollama.
+          </p>
+          <div className="pt-1">
             <button
               onClick={() => handleGenerate(true)}
-              className="px-4 py-2 rounded-xl bg-rose-700 text-white text-xs font-bold hover:bg-rose-800 transition-colors"
+              className="px-4 py-2 rounded-xl bg-[#1b4332] text-white text-xs font-bold hover:bg-[#2d6a4f] transition-colors"
             >
-              Load Verified Demo Plan Now
+              Load Sample Garden Plan
             </button>
           </div>
         </div>

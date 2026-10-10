@@ -71,7 +71,7 @@ export default function AboutPage() {
             <ul className="space-y-1 text-gray-600">
               <li>• <strong>API:</strong> Python FastAPI + Uvicorn</li>
               <li>• <strong>Validation:</strong> Pydantic v2 schemas</li>
-              <li>• <strong>AI Engine:</strong> Google Gemma 2 (Ollama / Groq / OpenRouter)</li>
+              <li>• <strong>AI Engine:</strong> Google Gemma (Google AI Studio / Ollama / Groq)</li>
               <li>• <strong>Weather:</strong> Open-Meteo Geocoding & Forecast API</li>
               <li>• <strong>Testing:</strong> pytest + pytest-asyncio (100% passing)</li>
             </ul>
@@ -108,7 +108,7 @@ export default function AboutPage() {
 
           <div className="p-3 rounded-xl border border-gray-200 flex items-center justify-between">
             <span className="font-medium text-gray-800">🧪 Automated Tests</span>
-            <span className="font-bold text-emerald-700">12 Unit Tests Passing</span>
+            <span className="font-bold text-emerald-700">22 Unit & Route Tests Passing</span>
           </div>
 
           <div className="p-3 rounded-xl border border-gray-200 flex items-center justify-between">

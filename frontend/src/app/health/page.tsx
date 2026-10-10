@@ -93,13 +93,13 @@ export default function HealthPage() {
       {/* Header */}
       <div className="border-b border-[#e8ebe4] pb-6">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-[#1b4332] mb-2">
-          <Sparkles className="w-3.5 h-3.5 text-[#2d6a4f]" /> Cautious Gemma 2 Plant Advisory
+          <Sparkles className="w-3.5 h-3.5 text-[#2d6a4f]" /> Powered by Gemma
         </div>
         <h1 className="text-3xl font-extrabold text-[#1b4332] flex items-center gap-2">
           <Stethoscope className="w-8 h-8 text-[#52796f]" /> Plant Health Assistant
         </h1>
         <p className="text-sm text-gray-600 mt-1">
-          Describe observed plant symptoms for educational, non-toxic diagnostic guidance and physical check recommendations.
+          Structured diagnostic assessments and organic, low-risk physical checks for common plant issues.
         </p>
       </div>
 
@@ -226,15 +226,15 @@ export default function HealthPage() {
           </div>
         </div>
 
-        {/* Vision Limitation Transparency */}
-        <div className="p-3.5 rounded-xl bg-blue-50 border border-blue-200 text-xs text-blue-900 flex items-start gap-2.5">
-          <Info className="w-4 h-4 text-blue-700 shrink-0 mt-0.5" />
+        {/* Diagnostic Transparency */}
+        <div className="p-3.5 rounded-xl bg-[#fbfbf7] border border-[#e8ebe4] text-xs text-gray-600 flex items-start gap-2.5">
+          <Info className="w-4 h-4 text-[#52796f] shrink-0 mt-0.5" />
           <p>
-            <strong>Image Analysis Transparency:</strong> To maintain strict honesty without hallucinated vision claims, this assistant performs deep structured textual reasoning over your physical symptom observations. Do not upload uncertain images.
+            Assessments are grounded in observed physical symptoms and environmental context. For commercial crops or severe rot, consult agricultural extension specialists.
           </p>
         </div>
 
-        {/* Submission & Demo Toggle */}
+        {/* Action Buttons */}
         <div className="flex flex-wrap items-center justify-between gap-4 pt-2 border-t border-[#f0f2ed]">
           <div className="flex items-center gap-3">
             <button
@@ -252,30 +252,20 @@ export default function HealthPage() {
               disabled={loading}
               className="text-xs font-medium text-[#52796f] hover:text-[#1b4332] underline"
             >
-              Load Tulsi Demo Fixture
+              Load Sample Case (Tulsi)
             </button>
           </div>
-
-          <label className="flex items-center gap-2 text-xs text-gray-600 cursor-pointer">
-            <input
-              type="checkbox"
-              checked={useSampleData}
-              onChange={(e) => setUseSampleData(e.target.checked)}
-              className="accent-[#2d6a4f]"
-            />
-            <span>Use Sample Demo Mode</span>
-          </label>
         </div>
       </div>
 
       {/* Error state */}
       {error && !loading && (
-        <div className="p-5 rounded-2xl bg-rose-50 border border-rose-200 text-rose-900 text-xs space-y-2">
-          <p className="font-bold flex items-center gap-1.5 text-rose-800">
-            <AlertTriangle className="w-4 h-4 text-rose-600" /> Assessment Error
+        <div className="p-5 rounded-2xl bg-amber-50/80 border border-amber-200 text-amber-950 text-xs space-y-2">
+          <p className="font-bold flex items-center gap-1.5 text-amber-900">
+            <AlertTriangle className="w-4 h-4 text-amber-600" /> Assessment Service Unavailable
           </p>
-          <p className="font-mono text-[11px]">{error}</p>
-          <p>Ensure Ollama is running or use the sample demo button above.</p>
+          <p className="font-mono text-[11px] bg-white/70 p-2.5 rounded-lg border border-amber-200">{error}</p>
+          <p className="text-amber-800">Verify your <code>GEMINI_API_KEY</code> in <code>.env</code> or load the sample diagnostic case above.</p>
         </div>
       )}
 

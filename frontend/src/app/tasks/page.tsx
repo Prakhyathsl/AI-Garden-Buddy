@@ -71,7 +71,7 @@ export default function TasksPage() {
             <CheckSquare className="w-8 h-8 text-[#52796f]" /> Garden Task Calendar
           </h1>
           <p className="text-sm text-gray-600 mt-1">
-            Read the instructions, step outdoors, put your phone away, and connect with living plants.
+            Actionable daily steps and screen-free outdoor missions connecting you with your garden.
           </p>
         </div>
 

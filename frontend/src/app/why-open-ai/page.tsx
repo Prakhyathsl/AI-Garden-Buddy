@@ -92,8 +92,8 @@ export default function WhyOpenAIPage() {
           </div>
           <h3 className="font-bold text-[#1b4332] text-base">Model Swappability</h3>
           <p className="text-xs text-gray-600 leading-relaxed">
-            You are not locked into a closed-source proprietary subscription. Switch seamlessly between 
-            <code>gemma2:2b</code> (for low-power laptops), <code>gemma2:9b</code> (for balanced precision), or <code>gemma2:27b</code> without rewriting code.
+            You are not locked into a closed-source proprietary platform. Switch seamlessly between 
+            local Ollama instances (<code>gemma2:9b</code>) and Google AI Studio-hosted Gemma endpoints (<code>gemma-4-26b-a4b-it</code>) via standard configuration.
           </p>
         </div>
 

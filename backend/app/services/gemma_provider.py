@@ -61,6 +61,7 @@ class GemmaProvider:
         """Returns the current Gemma inference configuration and connectivity."""
         ollama_available, ollama_models = await GemmaProvider.probe_ollama()
         
+        has_gemini = bool(settings.gemini_api_key)
         has_groq = bool(settings.groq_api_key)
         has_openrouter = bool(settings.openrouter_api_key)
         has_hf = bool(settings.huggingface_api_key)
@@ -75,11 +76,17 @@ class GemmaProvider:
             elif ollama_available:
                 active_mode = "ollama_local"
                 active_model = settings.gemma_model
+            elif has_gemini:
+                active_mode = "gemini_api"
+                active_model = "gemma-2-27b-it (Google AI Studio)"
             elif has_groq:
                 active_mode = "groq_api"
-                active_model = "gemma2-9b-it"
+                active_model = "gemma2-9b-it (Groq)"
             elif has_openrouter:
                 active_mode = "openrouter_api"
+                active_model = "google/gemma-2-9b-it"
+            elif has_hf:
+                active_mode = "huggingface_api"
                 active_model = "google/gemma-2-9b-it"
             elif has_custom:
                 active_mode = "openai_compatible"
@@ -98,6 +105,7 @@ class GemmaProvider:
             "ollama_running": ollama_available,
             "ollama_models": ollama_models,
             "remote_providers_configured": {
+                "google_ai_studio": has_gemini,
                 "groq": has_groq,
                 "openrouter": has_openrouter,
                 "huggingface": has_hf,
@@ -162,6 +170,39 @@ class GemmaProvider:
             except json.JSONDecodeError as jde:
                 raise ValueError(f"Gemma model returned invalid JSON structure: {jde}")
 
+        # 1b. Google AI Studio Gemma endpoint (Official Google API)
+        if active_mode == "gemini_api":
+            try:
+                endpoint = f"https://generativelanguage.googleapis.com/v1beta/models/gemma-2-27b-it:generateContent?key={settings.gemini_api_key}"
+                async with httpx.AsyncClient(timeout=settings.inference_timeout_seconds) as client:
+                    resp = await client.post(
+                        endpoint,
+                        headers={"Content-Type": "application/json"},
+                        json={
+                            "contents": [
+                                {
+                                    "role": "user",
+                                    "parts": [{"text": prompt}]
+                                }
+                            ],
+                            "generationConfig": {
+                                "temperature": 0.2,
+                                "responseMimeType": "application/json"
+                            }
+                        }
+                    )
+                    if resp.status_code != 200:
+                        raise RuntimeError(f"Google AI Studio Gemma error ({resp.status_code}): {resp.text}")
+                    data = resp.json()
+                    content = data["candidates"][0]["content"]["parts"][0]["text"]
+                    clean_text = clean_json_response(content)
+                    parsed = json.loads(clean_text)
+                    return parsed, "gemma-2-27b-it (Google AI Studio)", "gemini_api"
+            except httpx.TimeoutException:
+                raise TimeoutError("Google AI Studio Gemma inference timed out.")
+            except Exception as e:
+                raise RuntimeError(f"Google AI Studio Gemma inference failed: {str(e)}")
+
         # 2. Groq cloud API (Gemma 2 9B IT)
         if active_mode == "groq_api":
             try:
@@ -219,6 +260,32 @@ class GemmaProvider:
                     return parsed, "google/gemma-2-9b-it (OpenRouter)", "openrouter_api"
             except Exception as e:
                 raise RuntimeError(f"OpenRouter Gemma inference failed: {str(e)}")
+
+        # 3b. Hugging Face Inference API (google/gemma-2-9b-it)
+        if active_mode == "huggingface_api":
+            try:
+                async with httpx.AsyncClient(timeout=settings.inference_timeout_seconds) as client:
+                    resp = await client.post(
+                        "https://router.huggingface.co/together/v1/chat/completions",
+                        headers={
+                            "Authorization": f"Bearer {settings.huggingface_api_key}",
+                            "Content-Type": "application/json"
+                        },
+                        json={
+                            "model": "google/gemma-2-9b-it",
+                            "messages": [{"role": "user", "content": prompt}],
+                            "temperature": 0.3
+                        }
+                    )
+                    if resp.status_code != 200:
+                        raise RuntimeError(f"Hugging Face Gemma API error ({resp.status_code}): {resp.text}")
+                    data = resp.json()
+                    content = data["choices"][0]["message"]["content"]
+                    clean_text = clean_json_response(content)
+                    parsed = json.loads(clean_text)
+                    return parsed, "google/gemma-2-9b-it (Hugging Face)", "huggingface_api"
+            except Exception as e:
+                raise RuntimeError(f"Hugging Face Gemma inference failed: {str(e)}")
 
         # 4. Custom OpenAI-compatible Gemma endpoint
         if active_mode == "openai_compatible":

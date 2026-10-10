@@ -21,22 +21,56 @@ from app.config import settings
 
 
 def clean_json_response(raw_text: str) -> str:
-    """Strips markdown code blocks, think blocks, and extraneous text to isolate JSON."""
+    """Strips markdown code blocks, think blocks, and extraneous text to isolate valid JSON."""
     text = raw_text.strip()
     
     # Remove thinking tags if present
     text = re.sub(r"<think>.*?</think>", "", text, flags=re.DOTALL).strip()
+    text = re.sub(r"<thought>.*?</thought>", "", text, flags=re.DOTALL).strip()
     
-    # Extract content inside markdown ```json ... ``` or ``` ... ```
-    match = re.search(r"```(?:json)?\s*([\s\S]*?)\s*```", text)
-    if match:
-        text = match.group(1).strip()
+    # 1. Quick check: if already valid JSON
+    try:
+        json.loads(text)
+        return text
+    except Exception:
+        pass
+
+    # 2. Extract content inside markdown ```json ... ``` or ``` ... ```
+    matches = list(re.finditer(r"```(?:json)?\s*([\s\S]*?)(?:```|$)", text))
+    for m in reversed(matches):
+        candidate = m.group(1).strip()
+        if candidate:
+            try:
+                json.loads(candidate)
+                return candidate
+            except Exception:
+                start = candidate.find("{")
+                end = candidate.rfind("}")
+                if start != -1 and end > start:
+                    sub = candidate[start:end+1]
+                    try:
+                        json.loads(sub)
+                        return sub
+                    except Exception:
+                        pass
         
-    # If there are trailing or leading chars outside { and }
+    # 3. Look for balanced JSON object by scanning brace pairs
+    brace_indices = [i for i, c in enumerate(text) if c == '{']
+    for start in reversed(brace_indices):
+        end = text.rfind("}")
+        while end > start:
+            sub = text[start:end+1]
+            try:
+                json.loads(sub)
+                return sub
+            except Exception:
+                end = text.rfind("}", start, end)
+
+    # 4. Fallback to outer braces slice
     start = text.find("{")
     end = text.rfind("}")
     if start != -1 and end != -1 and end > start:
-        text = text[start:end+1]
+        return text[start:end+1]
         
     return text
 
@@ -201,12 +235,25 @@ class GemmaProvider:
                     if resp.status_code != 200:
                         raise RuntimeError(f"Google AI Studio Gemma error ({resp.status_code}): {resp.text}")
                     data = resp.json()
-                    content = data["candidates"][0]["content"]["parts"][0]["text"]
+                    candidates = data.get("candidates", [])
+                    if not candidates:
+                        raise RuntimeError(f"Google AI Studio returned no candidate responses: {data}")
+                    parts = candidates[0].get("content", {}).get("parts", [])
+                    if not parts:
+                        raise RuntimeError("Google AI Studio response candidate contained no text parts.")
+                    
+                    # Extract the non-thought content part, or fall back to the last part
+                    content = next((p.get("text", "") for p in reversed(parts) if p.get("text") and not p.get("thought")), parts[-1].get("text", ""))
                     clean_text = clean_json_response(content)
-                    parsed = json.loads(clean_text)
+                    try:
+                        parsed = json.loads(clean_text)
+                    except json.JSONDecodeError as jde:
+                        raise ValueError(f"Google AI Studio Gemma returned invalid JSON structure: {jde}")
                     return parsed, f"{settings.gemini_model} (Google AI Studio)", "gemini_api"
             except httpx.TimeoutException:
                 raise TimeoutError("Google AI Studio Gemma inference timed out.")
+            except (ValueError, TimeoutError, RuntimeError):
+                raise
             except Exception as e:
                 raise RuntimeError(f"Google AI Studio Gemma inference failed: {str(e)}")
 

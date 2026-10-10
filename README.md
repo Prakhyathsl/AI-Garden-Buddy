@@ -10,7 +10,7 @@
 [![Model](https://img.shields.io/badge/Model-Google%20Gemma%202%20(Open%20Weights)-blue.svg)](https://ai.google.dev/gemma)
 [![Backend](https://img.shields.io/badge/Backend-FastAPI%20%7C%20Pydantic%20v2-green.svg)](backend/)
 [![Frontend](https://img.shields.io/badge/Frontend-Next.js%2016%20%7C%20Tailwind%20CSS-teal.svg)](frontend/)
-[![Tests](https://img.shields.io/badge/Tests-12%20Passing%20(100%25)-brightgreen.svg)](backend/tests/)
+[![Tests](https://img.shields.io/badge/Tests-22%20Passing%20(100%25)-brightgreen.svg)](backend/tests/)
 
 ---
 
@@ -166,7 +166,7 @@ No GPU or API key? Check the **"Use Verified Sample Demo Data"** box in the UI t
 ```bash
 .\.venv\Scripts\pytest.exe backend/tests -v
 ```
-**Results:** `17 passed in 29.54s (100% pass rate)`
+**Results:** `22 passed in 30.08s (100% pass rate)`
 - Validates root and health checks
 - Validates garden profile schema constraints
 - Validates 7-day plan structure and outdoor mission generation

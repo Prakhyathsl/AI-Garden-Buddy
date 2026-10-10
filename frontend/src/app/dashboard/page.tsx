@@ -79,18 +79,18 @@ export default function DashboardPage() {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#e8ebe4] pb-6">
         <div>
           <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-            <span className="text-xs font-semibold text-[#52796f] uppercase tracking-wider">Active Garden</span>
+            <span className="w-2 h-2 rounded-full bg-emerald-600"></span>
+            <span className="text-xs font-semibold text-[#52796f] uppercase tracking-wider">Active Space</span>
           </div>
           <h1 className="text-3xl font-extrabold text-[#1b4332] mt-1">
             {profile?.garden_name || 'My Garden'}
           </h1>
-          <p className="text-sm text-gray-600 flex items-center gap-2 mt-1">
-            <span>📍 {profile?.location || 'Mangalore, India'}</span>
+          <p className="text-sm text-gray-600 flex flex-wrap items-center gap-2 mt-1">
+            <span>{profile?.location || 'Mangalore, India'}</span>
             <span>•</span>
-            <span>🪴 {profile?.containers_count || 6} Containers</span>
+            <span>{profile?.containers_count || 6} containers</span>
             <span>•</span>
-            <span className="capitalize">☀️ {profile?.sunlight_exposure?.replace('_', ' ') || 'Partial sun'}</span>
+            <span className="capitalize">{profile?.sunlight_exposure?.replace('_', ' ') || 'Partial sun'}</span>
           </p>
         </div>
 
@@ -100,7 +100,7 @@ export default function DashboardPage() {
             className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#1b4332] text-white text-sm font-semibold hover:bg-[#2d6a4f] shadow-sm transition-all"
           >
             <Sparkles className="w-4 h-4 text-[#74c69d]" />
-            {plan ? 'Update Plan' : 'Generate Weekly Plan'}
+            {plan ? 'Update Plan' : 'Plan my week'}
           </Link>
           <Link
             href="/profile"
@@ -128,7 +128,7 @@ export default function DashboardPage() {
                   : '29°C'}
               </span>
               <span className="text-xs font-medium text-gray-500">
-                {weather?.is_live_data ? 'Live Open-Meteo' : 'Seasonal Fallback'}
+                {weather?.is_live_data ? 'Live Open-Meteo' : 'Seasonal fallback'}
               </span>
             </div>
 
@@ -145,15 +145,15 @@ export default function DashboardPage() {
           </div>
 
           <div className="mt-5 p-3 rounded-xl bg-[#f4f4ea] text-xs text-[#2d6a4f] leading-relaxed">
-            <strong>Horticultural Note:</strong> {weather?.gardening_advice_implication || 'Morning sun conditions are active. Ensure container pots have clear bottom drainage.'}
+            <strong>Horticultural note:</strong> {weather?.gardening_advice_implication || 'Morning sun conditions are active. Ensure container pots have clear bottom drainage.'}
           </div>
         </div>
 
-        {/* Outdoor Mission Spotlight (Touch Grass) */}
-        <div className="lg:col-span-2 rounded-2xl bg-gradient-to-br from-[#1b4332] to-[#2d6a4f] text-white p-6 sm:p-8 flex flex-col justify-between shadow-md">
+        {/* Outdoor Mission Spotlight */}
+        <div className="lg:col-span-2 rounded-3xl bg-[#1b4332] text-white p-6 sm:p-8 flex flex-col justify-between shadow-md border border-[#2d6a4f]/40">
           <div className="space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-xs font-semibold text-[#74c69d] border border-white/20">
-              🌿 Today&apos;s Screen-Free Mission
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-xs font-medium text-[#74c69d] border border-white/20">
+              <Sparkles className="w-3.5 h-3.5" /> Today&apos;s Outdoor Mission
             </div>
 
             {todayTask ? (
@@ -161,7 +161,7 @@ export default function DashboardPage() {
                 <h3 className="text-2xl font-bold tracking-tight text-white">
                   {todayTask.title}
                 </h3>
-                <p className="text-base text-[#cad2c5] leading-relaxed">
+                <p className="text-base text-[#cad2c5] leading-relaxed font-light">
                   &ldquo;{todayTask.outdoor_mission}&rdquo;
                 </p>
                 <div className="flex items-center gap-4 text-xs text-[#cad2c5]/90 pt-1">
@@ -174,9 +174,9 @@ export default function DashboardPage() {
               </div>
             ) : (
               <div className="space-y-2">
-                <h3 className="text-2xl font-bold text-white">No Active Plan Yet</h3>
+                <h3 className="text-2xl font-bold text-white">No active plan yet</h3>
                 <p className="text-sm text-[#cad2c5]">
-                  Generate a personalized 7-day schedule to get your hands in the soil today.
+                  Plan your week to generate a 7-day schedule with daily screen-free outdoor missions.
                 </p>
               </div>
             )}
@@ -186,19 +186,19 @@ export default function DashboardPage() {
             {todayTask && (
               <button
                 onClick={() => toggleTask(todayTask.id)}
-                className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+                className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
                   completedTasks[todayTask.id]
-                    ? 'bg-emerald-500 text-white'
+                    ? 'bg-emerald-600 text-white'
                     : 'bg-[#74c69d] text-[#132a22] hover:bg-[#52b788]'
                 }`}
               >
                 {completedTasks[todayTask.id] ? (
                   <>
-                    <Check className="w-4 h-4" /> Mission Completed!
+                    <Check className="w-4 h-4" /> Completed
                   </>
                 ) : (
                   <>
-                    <CheckCircle2 className="w-4 h-4" /> Mark Mission Done
+                    <CheckCircle2 className="w-4 h-4" /> Mark complete
                   </>
                 )}
               </button>
@@ -208,7 +208,7 @@ export default function DashboardPage() {
               href="/tasks"
               className="text-xs font-semibold text-[#74c69d] hover:text-white flex items-center gap-1 transition-colors"
             >
-              View Full 7-Day Calendar <ArrowRight className="w-3.5 h-3.5" />
+              View 7-day calendar <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
         </div>

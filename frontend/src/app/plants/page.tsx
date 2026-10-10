@@ -80,8 +80,8 @@ export default function PlantsPage() {
           </p>
         </div>
 
-        <div className="text-xs font-semibold px-3 py-1.5 rounded-xl bg-[#e8f5e9] text-[#1b4332] border border-[#c8e6c9] self-start md:self-auto">
-          🪴 {myPlantIds.length} Plants in Your Garden
+        <div className="text-xs font-semibold px-3 py-1.5 rounded-xl bg-[#e8f5e9] text-[#1b4332] border border-[#c8e6c9] self-start md:self-auto flex items-center gap-1.5">
+          <Sprout className="w-3.5 h-3.5 text-[#2d6a4f]" /> {myPlantIds.length} Plants in Your Garden
         </div>
       </div>
 
@@ -125,13 +125,14 @@ export default function PlantsPage() {
             <button
               type="button"
               onClick={() => setContainerOnly(!containerOnly)}
-              className={`px-3 py-2 rounded-xl text-xs font-semibold border transition-all ${
+              className={`px-3 py-2 rounded-xl text-xs font-semibold border transition-all flex items-center gap-1.5 ${
                 containerOnly
                   ? 'bg-[#1b4332] text-white border-[#1b4332]'
                   : 'bg-white text-gray-700 border-gray-300 hover:border-[#2d6a4f]'
               }`}
             >
-              🪴 Container Friendly Only
+              <span className={`w-2 h-2 rounded-full ${containerOnly ? 'bg-[#74c69d]' : 'bg-gray-400'}`} />
+              Container Friendly Only
             </button>
           </div>
         </div>
@@ -262,23 +263,29 @@ export default function PlantsPage() {
               </div>
 
               <div>
-                <h4 className="font-bold text-[#1b4332] text-sm mb-1">🌱 Planting & Germination</h4>
+                <h4 className="font-bold text-[#1b4332] text-sm mb-1 flex items-center gap-1.5">
+                  <Sprout className="w-3.5 h-3.5 text-[#52796f]" /> Planting & Germination
+                </h4>
                 <p>{selectedPlant.planting_summary}</p>
               </div>
 
               <div>
-                <h4 className="font-bold text-[#1b4332] text-sm mb-1">✂️ Harvesting Guidance</h4>
+                <h4 className="font-bold text-[#1b4332] text-sm mb-1 flex items-center gap-1.5">
+                  <Sun className="w-3.5 h-3.5 text-[#52796f]" /> Harvesting Guidance
+                </h4>
                 <p>{selectedPlant.harvesting_summary}</p>
               </div>
 
               <div>
-                <h4 className="font-bold text-[#1b4332] text-sm mb-1">🪴 Ideal Soil Composition</h4>
+                <h4 className="font-bold text-[#1b4332] text-sm mb-1 flex items-center gap-1.5">
+                  <Droplet className="w-3.5 h-3.5 text-[#52796f]" /> Ideal Soil Composition
+                </h4>
                 <p>{selectedPlant.suitable_soil}</p>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="p-3.5 rounded-xl bg-amber-50/60 border border-amber-200">
-                  <h5 className="font-bold text-amber-900 mb-1 flex items-center gap-1">
+                  <h5 className="font-bold text-amber-900 mb-1 flex items-center gap-1.5">
                     <AlertTriangle className="w-3.5 h-3.5 text-amber-600" /> Common Problems
                   </h5>
                   <ul className="list-disc list-inside space-y-0.5 text-amber-950">
@@ -289,7 +296,7 @@ export default function PlantsPage() {
                 </div>
 
                 <div className="p-3.5 rounded-xl bg-emerald-50/60 border border-emerald-200">
-                  <h5 className="font-bold text-emerald-900 mb-1 flex items-center gap-1">
+                  <h5 className="font-bold text-emerald-900 mb-1 flex items-center gap-1.5">
                     <Sprout className="w-3.5 h-3.5 text-emerald-600" /> Preventive Care
                   </h5>
                   <ul className="list-disc list-inside space-y-0.5 text-emerald-950">
@@ -302,7 +309,9 @@ export default function PlantsPage() {
 
               {selectedPlant.caution_or_toxicity_notes && (
                 <div className="p-3.5 rounded-xl bg-stone-100 border border-stone-200 text-stone-700">
-                  <span className="font-bold block text-stone-900 mb-0.5">⚠️ Caution / Pet Notes:</span>
+                  <span className="font-bold block text-stone-900 mb-0.5 flex items-center gap-1.5">
+                    <ShieldAlert className="w-3.5 h-3.5 text-stone-600" /> Caution & Toxicity Notes:
+                  </span>
                   <p>{selectedPlant.caution_or_toxicity_notes}</p>
                 </div>
               )}

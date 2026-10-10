@@ -143,21 +143,21 @@ export default function ProfilePage() {
             onClick={() => loadPreset('mangalore')}
             className="px-3.5 py-2 rounded-xl text-xs font-semibold bg-[#e8f5e9] text-[#1b4332] hover:bg-[#c8e6c9] transition-all"
           >
-            🌊 Mangalore Coastal Balcony (40 sq ft)
+            Mangalore Coastal Balcony (40 sq ft)
           </button>
           <button
             type="button"
             onClick={() => loadPreset('bangalore')}
             className="px-3.5 py-2 rounded-xl text-xs font-semibold bg-[#fefae0] text-[#603813] hover:bg-[#faedcd] transition-all"
           >
-            ☀️ Bangalore Sunny Terrace (120 sq ft)
+            Bangalore Sunny Terrace (120 sq ft)
           </button>
           <button
             type="button"
             onClick={() => loadPreset('indoor')}
             className="px-3.5 py-2 rounded-xl text-xs font-semibold bg-[#f0f4f8] text-[#1e3a8a] hover:bg-[#dbeafe] transition-all"
           >
-            🪴 Kitchen Windowsill Ledge (12 sq ft)
+            Kitchen Windowsill Ledge (12 sq ft)
           </button>
         </div>
       </div>
@@ -411,7 +411,7 @@ export default function ProfilePage() {
             type="submit"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#1b4332] text-white text-sm font-bold hover:bg-[#2d6a4f] shadow-md transition-all"
           >
-            <Save className="w-4 h-4 text-[#74c69d]" /> Save Garden Settings
+            <Save className="w-4 h-4 text-[#74c69d]" /> Save Profile
           </button>
 
           {savedSuccess && (

@@ -30,12 +30,11 @@ class Settings(BaseModel):
     gemma_api_key: str = os.getenv("GEMMA_API_KEY", "")
     
     # Timeout & security
-    inference_timeout_seconds: float = float(os.getenv("INFERENCE_TIMEOUT_SECONDS", "45.0"))
+    inference_timeout_seconds: float = float(os.getenv("INFERENCE_TIMEOUT_SECONDS", "90.0"))
     allowed_origins: list[str] = [
         "http://localhost:3000",
         "http://127.0.0.1:3000",
         "http://localhost:3001",
-        "*"
     ]
 
 

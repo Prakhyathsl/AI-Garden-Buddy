@@ -93,7 +93,7 @@ export default function TasksPage() {
           </div>
           <div>
             <span className="text-2xl font-extrabold text-[#1b4332]">{streakDays} Day{streakDays === 1 ? '' : 's'}</span>
-            <p className="text-xs text-gray-500 font-medium">Outdoor Garden Streak 🔥</p>
+            <p className="text-xs text-gray-500 font-medium">Outdoor Garden Streak</p>
           </div>
         </div>
 
@@ -205,8 +205,8 @@ export default function TasksPage() {
 
                       {/* Screen-Free Outdoor Mission */}
                       <div className="mt-3 p-3.5 rounded-xl bg-amber-50/70 border border-amber-200 text-xs text-amber-900 space-y-1">
-                        <span className="font-bold flex items-center gap-1 text-[#bc6c25]">
-                          🌿 Touch Grass Mission:
+                        <span className="font-bold flex items-center gap-1.5 text-[#bc6c25]">
+                          Outdoor Observation Mission:
                         </span>
                         <p className="italic leading-relaxed">{task.outdoor_mission}</p>
                       </div>
@@ -233,7 +233,7 @@ export default function TasksPage() {
                           : 'bg-[#1b4332] text-white hover:bg-[#2d6a4f]'
                       }`}
                     >
-                      {isDone ? 'Mark Incomplete' : 'Complete Task'}
+                      {isDone ? 'Undo' : 'Mark Complete'}
                     </button>
                   </div>
                 </div>

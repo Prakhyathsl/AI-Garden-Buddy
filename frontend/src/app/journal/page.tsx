@@ -13,7 +13,8 @@ import {
   Trash2, 
   CheckCircle2,
   Sparkles,
-  Info
+  Info,
+  Sprout
 } from 'lucide-react';
 import { loadJournalEntries, saveJournalEntries } from '@/lib/storage';
 import { JournalEntry } from '@/types';
@@ -96,7 +97,7 @@ export default function JournalPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
           <div className="p-4 rounded-xl bg-[#fbfbf7] border border-[#e8ebe4] space-y-1.5">
             <span className="font-bold text-xs text-[#1b4332] flex items-center gap-1.5">
-              💧 Targeted Root Watering
+              <Droplet className="w-3.5 h-3.5 text-[#52796f]" /> Targeted Root Watering
             </span>
             <p className="text-[11px] text-gray-600 leading-relaxed">
               Water at soil base during early morning hours to prevent evaporation loss and deter evening fungal growth.
@@ -105,7 +106,7 @@ export default function JournalPage() {
 
           <div className="p-4 rounded-xl bg-[#fbfbf7] border border-[#e8ebe4] space-y-1.5">
             <span className="font-bold text-xs text-[#1b4332] flex items-center gap-1.5">
-              🌱 Kitchen Scrap Compost
+              <Sprout className="w-3.5 h-3.5 text-[#52796f]" /> Kitchen Scrap Compost
             </span>
             <p className="text-[11px] text-gray-600 leading-relaxed">
               Turn coffee grounds, tea leaves, and vegetable peelings into aerated vermicompost instead of sending organics to landfills.
@@ -114,7 +115,7 @@ export default function JournalPage() {
 
           <div className="p-4 rounded-xl bg-[#fbfbf7] border border-[#e8ebe4] space-y-1.5">
             <span className="font-bold text-xs text-[#1b4332] flex items-center gap-1.5">
-              🪴 Reused Containers
+              <Recycle className="w-3.5 h-3.5 text-[#52796f]" /> Reused Containers
             </span>
             <p className="text-[11px] text-gray-600 leading-relaxed">
               Drill drainage holes in sturdy food-grade buckets, tin boxes, or coconut shells for eco-friendly starter pots.
@@ -123,7 +124,7 @@ export default function JournalPage() {
 
           <div className="p-4 rounded-xl bg-[#fbfbf7] border border-[#e8ebe4] space-y-1.5">
             <span className="font-bold text-xs text-[#1b4332] flex items-center gap-1.5">
-              🐝 Pollinator Support
+              <Heart className="w-3.5 h-3.5 text-[#52796f]" /> Pollinator Support
             </span>
             <p className="text-[11px] text-gray-600 leading-relaxed">
               Add nectar-rich marigolds and shallow water dishes with pebbles to give solitary bees safe balcony hydration.

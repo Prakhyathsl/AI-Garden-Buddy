@@ -427,7 +427,8 @@ export default function PlannerPage() {
               </div>
 
               <div>
-                <span className="font-bold text-gray-800 block mb-1">Reference Citations:</span>
+                <span className="font-bold text-gray-800 block mb-1">Horticultural References (Curated Literature):</span>
+                <p className="text-[10px] text-gray-500 mb-1.5 italic">Grounded in established agricultural extension guidelines (ICAR, RHS, FAO) — distinct from AI schedule suggestions.</p>
                 <ul className="space-y-1 list-disc list-inside">
                   {plan.sources.map((src, i) => (
                     <li key={i}>{src}</li>

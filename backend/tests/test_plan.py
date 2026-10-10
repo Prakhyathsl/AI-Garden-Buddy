@@ -80,3 +80,21 @@ async def test_malformed_model_output_error():
             response = await ac.post("/api/garden/plan", json=payload)
         assert response.status_code == 422
         assert "parsed into structured format" in response.json()["detail"]
+
+
+@pytest.mark.asyncio
+async def test_model_timeout_error():
+    with patch.object(GemmaProvider, "generate_response", side_effect=TimeoutError("Request timed out")):
+        payload = {
+            "profile": {
+                "garden_name": "Test Garden",
+                "location": "Mangalore, India",
+                "garden_type": "balcony"
+            },
+            "use_sample_data": False
+        }
+        async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as ac:
+            response = await ac.post("/api/garden/plan", json=payload)
+        assert response.status_code == 504
+        assert "timed out" in response.json()["detail"].lower()
+

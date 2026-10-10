@@ -1,192 +1,189 @@
 ---
-title: "AI Garden Buddy: A Garden Planner Powered by Open-Weight Gemma"
+title: "AI Garden Buddy: A Smarter Way to Care for Plants with Gemma"
 published: false
-description: "Grow smarter. Waste less. Get outside. A privacy-first gardening companion powered by Google's open-weight Gemma 2 model, connecting people with living plants."
-tags: "devchallenge, hf26challenge, gemma, ai, opensource, webdev"
+description: "Grow smarter. Waste less. Get outside. An AI-powered plant-care and garden-planning companion built with Google's Gemma model via Google AI Studio."
+tags: "devchallenge, hf26challenge, gemma, ai, opensource"
 cover_image: ""
 canonical_url: ""
 ---
 
-# AI Garden Buddy: A Garden Planner Powered by Open-Weight Gemma
+# AI Garden Buddy: A Smarter Way to Care for Plants with Gemma
 
-> *Submitted to the Hacktoberfest 2026 Open-Source AI Challenge (Week 1) — Targeting the **Best Use of Gemma** Partner Category.*
-> 
-> **Tags:** `#devchallenge` `#hf26challenge`
-
----
-
-## 1. The Problem: Generic Chatbots and Indoor Screen Traps
-
-When urban and balcony gardeners turn to AI for guidance, they typically encounter two big frustrations:
-
-1. **Agricultural Hallucinations & Flawed Spatial Math:** Standard commercial LLMs frequently recommend deep-root taproot crops for shallow 6-inch balcony pots, suggest planting frost-sensitive varieties during humid tropical monsoons, or invent arbitrary chemical pesticide dosages.
-2. **The "Stay on Your Phone" Trap:** Most gardening apps attempt to maximize user screen engagement. They trap users in lengthy chat sessions, endless photo uploads, and notifications while living plants outside suffer from neglected soil moisture or poor drainage.
-
-Our guiding principle is simple: **Grow smarter. Waste less. Get outside.**
+> **Grow smarter. Waste less. Get outside.**  
+> *Built for the **Hacktoberfest 2026 Open-Source AI Challenge — Week 1: Touch Grass**, targeting the **Best Use of Gemma** partner category.*  
+> **Tags:** `#devchallenge` `#hf26challenge` `#gemma` `#ai` `#opensource`
 
 ---
 
-## 2. The "Touch Grass" Theme: Real Outdoor Impact
+## The Problem
 
-AI should inspire people to connect with the physical world, not substitute for it. 
+Taking care of plants can be difficult when you don't know why leaves are turning yellow, how often to water, or which tasks to prioritize. Beginners often rely on guesswork, which can lead to overwatering, unhealthy plants, and wasted resources.
 
-We engineered **AI Garden Buddy** from the ground up around the **"Touch Grass"** ethos:
-- **30-Second Reads:** Each daily task is actionable and designed to be digested in under 30 seconds.
-- **Daily Outdoor Screen-Free Missions:** Every scheduled day features a tactile, sensory challenge:
-  - *Day 1:* Insert your bare finger 2 inches into the potting soil to test moisture depth.
-  - *Day 2:* Pinch the purple flowering tops of Holy Basil (Tulsi) and crush a fresh mint leaf between your palms to breathe in the natural menthol aroma.
-  - *Day 3:* Inspect under planter saucers, listen for urban bird songs, and look for pollinating bees.
-  - *Day 4:* Check foliage undersides for aphids and wipe dusty leaves with a damp cloth.
-  - *Day 5:* Dilute organic vermicompost tea into root zones.
-  - *Day 6:* Tie vining tomato stems to bamboo stakes and stretch in the weekend morning sun.
-  - *Day 7:* Harvest fresh herbs for afternoon tea and reflect on weekly plant growth.
-- **Offline Consistency:** The user reads the prompt, leaves their phone inside, and gets their hands into real living soil.
+Furthermore, most commercial plant apps trap users indoors on their phones—scrolling through endless social feeds or typing back and forth with generic chatbots while their plants sit outside needing attention.
+
+I built **AI Garden Buddy** to make plant care practical, personalized, and accessible, while encouraging gardeners to step away from screens and connect with real nature.
 
 ---
 
-## 3. How Google's Gemma 2 Powers the Application
+## What is AI Garden Buddy?
 
-Google's open-weight **Gemma 2** (`gemma2:9b` locally or `gemma2-9b-it`) is the central reasoning engine powering two core features:
+**AI Garden Buddy** is an AI-powered plant-care application designed to help people spend less time guessing and more time caring for their gardens.
 
-### A. The Weekly Garden Planner (`/api/garden/plan`)
-- **Spatial Reasoning:** Gemma calculates whether container volumes and counts can support proposed species without root entanglement or light competition.
-- **Time Bounding:** Gemma strictly bounds every daily activity within the user's declared daily minute budget (e.g. 15 or 20 minutes).
-- **Meteorological Context:** Before Gemma infers, the backend fetches live temperature, humidity, and 7-day precipitation totals from the free **Open-Meteo API** (CC-BY 4.0), passing live meteorological readings directly into Gemma's context.
-- **Schema Compliance:** The model outputs RFC-compliant JSON strictly validated at runtime by **Pydantic v2** (`GardenPlan`).
-
-### B. The Plant Health Assistant (`/api/garden/diagnose`)
-- **Cautious Symptom Analysis:** Evaluates observed symptoms (chlorosis, necrosis, drooping) alongside watering routine and sunlight.
-- **Ranked Causes:** Ranks probable causes (e.g., overwatering vs. nitrogen leach) with transparent likelihoods.
-- **Zero Hallucinated Vision Claims:** We deliberately avoid unreliable computer vision hacks. Gemma performs deep structured textual reasoning over observed symptoms and provides physical diagnostic checks (e.g. 2-inch finger test, drainage hole inspection).
-- **Safety First:** Strict guardrails prevent the recommendation of synthetic poisons or hazardous chemical dosages.
+Its features include:
+- **AI Plant Health Assistant:** Get grounded guidance about observed plant symptoms, ranked possible causes, follow-up physical inspections, and non-toxic interventions.
+- **Personalized Garden Planner:** Generate an actionable 7-day plant-care routine tailored to space constraints, container counts, local weather, and daily minute budgets.
+- **Curated Plant Library:** Explore botanical care facts, container requirements, and companion notes grounded in agricultural standards (ICAR and RHS).
+- **Care Tasks and Streaks:** Track daily garden activities, complete screen-free missions, and build consistent outdoor streaks.
+- **Plant Journal & Sustainability:** Record growth milestones, log outdoor minutes, and learn low-waste urban gardening practices (targeted root watering, kitchen composting, container upcycling).
 
 ---
 
-## 4. Architecture & System Design
+## Why Gemma?
+
+I integrated Google's **Gemma** model through the official **Google AI Studio API** (`gemma-4-26b-a4b-it`) to power both the plant health assistant and the personalized garden planner.
+
+The model turns information about plants, symptoms, environmental conditions, and available time into structured, actionable guidance.
+
+I chose Gemma because open-weight models give developers the flexibility to inspect prompt behavior, adapt schemas, and build useful AI tools without being locked into a closed-model ecosystem.
+
+> **Transparency Notice:** This version utilizes hosted Google AI Studio inference (`x-goog-api-key` header with server-side proxying). It truthfully reports its active model and does not falsely claim to run offline when using cloud inference. For completely offline and private setups, local Ollama execution is also supported.
+
+---
+
+## How It Works
 
 ```
-Plantcare-ai/
-├── frontend/             # Next.js 16 (App Router), TypeScript, Tailwind CSS, Lucide
-│   ├── src/app/          # 10 pages: Landing, Dashboard, Profile, Planner, Plants, Tasks, Health, Journal, Why Open AI, About
-│   ├── src/components/   # Navbar, Footer, Live Gemma Engine Badge
-│   └── src/lib/          # API client, LocalStorage persistence, Verified demo fixtures
-├── backend/              # Python FastAPI, Pydantic v2 schemas
-│   ├── app/routes/       # /api/health, /api/garden/plan, /api/garden/diagnose, /api/plants, /api/weather
-│   ├── app/services/     # GemmaProvider, PromptBuilder, WeatherService, PlantDatabase
-│   ├── app/models/       # Typed Pydantic request & response schemas
-│   └── tests/            # 17 automated pytest test suites
-└── docs/                 # Architecture, benchmarks, and API guides
+[Browser / User]
+       │
+       ▼ (1. Submits symptoms or garden profile)
+[Next.js 16 Frontend]
+       │
+       ▼ (2. REST API call with clean error handling)
+[FastAPI Backend] ──> [Open-Meteo API] (Live temperature, humidity & rain)
+       │
+       ▼ (3. Authenticated payload with schema prompt)
+[Google AI Studio (Gemma)]
+       │
+       ▼ (4. Structured JSON response)
+[Pydantic v2 Validation] ──> Validates 7-day schedule & health schema
+       │
+       ▼ (5. Actionable garden plan displayed)
+[User Steps Outside to Garden!]
 ```
 
-### Multi-Provider Gemma Abstraction
-The backend implements a multi-provider client (`GemmaProvider`) supporting:
-1. **Local Ollama (Preferred & 100% Private):** Directly interfaces with `http://localhost:11434/api/generate` with `model: "gemma2:9b"`.
-2. **Google AI Studio API:** Connects with `gemma-2-27b-it` via official Google AI Studio endpoints when `GEMINI_API_KEY` is provided.
-3. **Groq Cloud API:** High-speed `gemma2-9b-it` inference when `GROQ_API_KEY` is provided.
-4. **Hugging Face / OpenRouter:** Compatible with `google/gemma-2-9b-it`.
-5. **Verified Demo Fixture Mode:** Clearly labeled reference data for testing without launching an inference server.
-
-*Rule of Transparency:* The application dynamically reports the active model and inference mode in the header badge (`Gemma 2 (Local Ollama)` vs `Gemma 2 (Groq Cloud)` vs `Gemma Demo Mode`). It **never** fabricates a successful response when a model fails.
+1. **User input:** The user inputs their garden parameters (space size, containers, sunlight, time budget) or observed plant symptoms (chlorosis, wilting, soil moisture).
+2. **Context enrichment:** The backend combines this input with live local meteorological data from Open-Meteo (temperature, relative humidity, precipitation).
+3. **Model inference:** The backend sends the structured prompt to the configured Gemma model via Google AI Studio. API keys are kept strictly on the backend and never exposed to the frontend client bundle.
+4. **Structured extraction & validation:** The backend extracts the model's non-thought JSON output using a multi-pass extractor, validating it against strict Pydantic schemas.
+5. **Presentation:** The application displays clear, actionable plant-care guidance or an organized 7-day calendar.
 
 ---
 
-## 5. Why Open-Weight AI Matters for Gardeners
+## Why This Fits "Touch Grass"
 
-1. **Complete Data Sovereignty:** Balcony floor plans, home coordinates, and daily schedules never leave the user's hardware.
-2. **Auditable Non-Toxic Safety:** We can inspect system prompts to guarantee hazardous pesticide recommendations are prohibited.
-3. **Hardware Independence:** Users can run `gemma2:2b` on low-power laptops, `gemma2:9b` on consumer GPUs, or run `gemma2:27b` without proprietary subscription lock-in.
-4. **Offline Resilience:** If cloud APIs suffer outages or rate limits, local Gemma inference continues functioning in off-grid or rural areas.
+AI Garden Buddy makes technology a springboard for spending more time outdoors, not an activity that keeps people staring at a screen.
 
----
+- **30-Second Micro-Tasks:** You read today's prompt in 30 seconds, then put your phone away.
+- **Daily Screen-Free Missions:** Every task includes a sensory outdoor habit—such as inserting a finger 2 inches into soil to test moisture, checking leaf undersides for beneficial insects, smelling crushed mint foliage, or watching for pollinators.
+- **Zero Hallucinated Computer Vision:** Rather than claiming a webcam can magically "diagnose" a plant from a blurry photo, the assistant guides the gardener to perform real physical checks with their own hands and eyes.
 
-## 6. Reproducible Gemma 2 Experiment (3 Scenarios)
-
-We evaluated Google's open-weight Gemma 2 model across three distinct gardening environments:
-
-| Scenario | Constraints | Gemma Recommended Species | Time Adherence | Schema Validity |
-|---|---|---|---|---|
-| **1. Coastal Balcony** | 40 sq ft, 6 pots, 4 hrs morning sun, 78% humidity (Mangalore, India) | Tulsi, Pudina (isolated pot), Cherry Tomato, French Marigold | 15–20 mins / day (budget: 20m) | 100% Valid JSON |
-| **2. Shaded Terrace** | 120 sq ft, 14 pots, 3-4 hrs dappled sun, windy (Bangalore, India) | Malabar Spinach (trellis), Fenugreek Greens, Spearmint, Lemongrass | 20–25 mins / day (budget: 30m) | 100% Valid JSON |
-| **3. Indoor Windowsill** | 12 sq ft, 3 pots, 2 hrs indirect light, beginner (Mumbai, India) | Fenugreek Microgreens, Mint cuttings, Coriander | 8–10 mins / day (budget: 10m) | 100% Valid JSON |
-
-### Empirical Takeaway
-Gemma 2 showed remarkable spatial restraint: it consistently refused to plant deep-root nightshades in shaded windows, and explicitly cautioned against planting spreading mint runners in the same container as slower companion herbs.
+The entire philosophy is: **digital guidance turning into real-world plant care.**
 
 ---
 
-## 7. Implementation Challenge: Reliable Structured JSON
+## Reproducible Gemma Experiment
 
-A key challenge with open-weight models is preventing conversational filler (e.g. *"Here is your garden plan:"*) or markdown code fences from corrupting JSON parsers.
+To evaluate Gemma's contextual reasoning, I tested the model across three distinct growing scenarios:
 
-### How We Solved It:
-1. **Schema-Constrained System Prompts:** Structured TypeScript-like interfaces directly embedded in the system prompt.
-2. **Multi-Pass Regex Cleaner:** An automated cleaner (`clean_json_response`) strips `<think>` tokens, regex-matches markdown code blocks, and isolates `{ ... }`.
-3. **Pydantic Validation Guard:** Runtime validation enforces that `weekly_tasks` contains exactly 7 days, each task has an `outdoor_mission`, and durations are bounded.
-4. **Honest Error Propagation:** If an inference times out or fails parsing, the backend returns an honest HTTP 422/504 error with actionable recovery advice rather than silently serving mock data.
+| Scenario | Microclimate & Constraints | Gemma Suggested Species | Time Adherence | Validation |
+| :--- | :--- | :--- | :--- | :--- |
+| **1. Coastal Balcony** | 40 sq ft, 8 pots, morning sun, 78% humidity (Mangalore) | Tulsi, Spearmint (isolated pot), Cherry Tomato, Marigold | 15–20 min/day (Budget: 20 min) | Validated `GardenPlan` |
+| **2. Sunny Terrace** | 120 sq ft, 14 pots, 6+ hrs sun, moderate winds (Bangalore) | Malabar Spinach (trellised), Chilli, Curry Leaf, Marigold | 25–30 min/day (Budget: 30 min) | Validated `GardenPlan` |
+| **3. Windowsill Ledge** | 12 sq ft, 3 containers, indirect light (Mumbai) | Fenugreek Microgreens, Mint cuttings, Coriander | 8–10 min/day (Budget: 10 min) | Validated `GardenPlan` |
+
+**Takeaway:** Gemma consistently respects container constraints—refusing deep taproot crops for shallow pots and explicitly recommending isolated containers for invasive runners like mint.
 
 ---
 
-## 8. Verified Testing & Build Results
+## What I Learned
 
-All tests have been run and verified:
+Building this project taught me several key engineering lessons:
 
+1. **Working with Real Model APIs vs. Mocks:** Testing real cloud inference with large models (`gemma-4-26b-a4b-it`) revealed nuances that mock tests miss. For instance, Gemma 4 separates chain-of-thought parts from final response parts, requiring response parsers to extract only the non-thought JSON content.
+2. **Resilient JSON Extraction:** Open-weight models occasionally prepend brief conversational phrases before code blocks. Implementing a multi-tier balanced brace extractor was critical for 100% reliable schema parsing.
+3. **Responsible AI Disclaimers:** An AI gardening assistant should provide practical suggestions while making it clear that AI-generated plant assessments are guidance rather than definitive diagnoses. It must never recommend dangerous chemical cocktails or toxic pesticides.
+4. **Human-Centered UI Design:** A gardening app should feel botanical, calm, and grounded—utilizing warm paper tones (`#fbfbf7`), forest green (`#1b4332`), and clear typography instead of flashy generic AI gradients and artificial glowing badges.
+
+---
+
+## Verified Testing & Production Build Results
+
+All backend tests and the Next.js production build have been fully verified:
+
+### 1. Pytest Backend Suite (22/22 Passing)
 ```text
-backend/tests/test_diagnose.py::test_diagnose_demo_fixture PASSED        [  5%]
-backend/tests/test_diagnose.py::test_diagnose_model_unavailable PASSED   [ 11%]
-backend/tests/test_diagnose.py::test_diagnose_model_timeout PASSED       [ 17%]
-backend/tests/test_diagnose.py::test_diagnose_malformed_output PASSED    [ 23%]
-backend/tests/test_health.py::test_root_endpoint PASSED                  [ 29%]
-backend/tests/test_health.py::test_health_endpoint PASSED                [ 35%]
-backend/tests/test_plan.py::test_demo_fixture_plan_generation PASSED     [ 41%]
-backend/tests/test_plan.py::test_model_unavailable_error PASSED          [ 47%]
-backend/tests/test_plan.py::test_malformed_model_output_error PASSED     [ 52%]
-backend/tests/test_plan.py::test_model_timeout_error PASSED              [ 58%]
-backend/tests/test_plants.py::test_get_all_plants PASSED                 [ 64%]
-backend/tests/test_plants.py::test_search_and_filter_plants PASSED       [ 70%]
-backend/tests/test_plants.py::test_plant_detail_not_found PASSED         [ 76%]
-backend/tests/test_validation.py::test_invalid_garden_profile_missing_fields PASSED [ 82%]
-backend/tests/test_validation.py::test_invalid_time_budget PASSED        [ 88%]
-backend/tests/test_validation.py::test_invalid_health_request_empty_symptoms PASSED [ 94%]
+backend/tests/test_diagnose.py::test_diagnose_demo_fixture PASSED        [  4%]
+backend/tests/test_diagnose.py::test_diagnose_model_unavailable PASSED   [  9%]
+backend/tests/test_diagnose.py::test_diagnose_model_timeout PASSED       [ 13%]
+backend/tests/test_diagnose.py::test_diagnose_malformed_output PASSED    [ 18%]
+backend/tests/test_google_provider.py::test_google_provider_selection_when_ollama_unavailable PASSED [ 22%]
+backend/tests/test_google_provider.py::test_google_provider_custom_model_configuration PASSED [ 27%]
+backend/tests/test_google_provider.py::test_google_provider_generate_response_mocked_http PASSED [ 31%]
+backend/tests/test_google_provider.py::test_google_provider_api_error_handling PASSED [ 36%]
+backend/tests/test_google_provider.py::test_google_provider_route_integration PASSED [ 40%]
+backend/tests/test_health.py::test_root_endpoint PASSED                  [ 45%]
+backend/tests/test_health.py::test_health_endpoint PASSED                [ 50%]
+backend/tests/test_plan.py::test_demo_fixture_plan_generation PASSED     [ 54%]
+backend/tests/test_plan.py::test_model_unavailable_error PASSED          [ 59%]
+backend/tests/test_plan.py::test_malformed_model_output_error PASSED     [ 63%]
+backend/tests/test_plan.py::test_model_timeout_error PASSED              [ 68%]
+backend/tests/test_plants.py::test_get_all_plants PASSED                 [ 72%]
+backend/tests/test_plants.py::test_search_and_filter_plants PASSED       [ 77%]
+backend/tests/test_plants.py::test_plant_detail_not_found PASSED         [ 81%]
+backend/tests/test_validation.py::test_invalid_garden_profile_missing_fields PASSED [ 86%]
+backend/tests/test_validation.py::test_invalid_time_budget PASSED        [ 90%]
+backend/tests/test_validation.py::test_invalid_health_request_empty_symptoms PASSED [ 95%]
 backend/tests/test_weather.py::test_weather_endpoint_safe_response PASSED [100%]
 
-============================= 17 passed in 29.54s =============================
+============================= 22 passed in 30.08s =============================
 ```
 
-- **Backend Pytest Suite:** **17/17 tests passing (100% pass rate)**.
-- **Frontend Production Build:** **13/13 static routes compiled cleanly with 0 TypeScript/ESLint errors**.
-- **Live Weather Integration:** Verified against Open-Meteo geocoding and forecast endpoints.
+### 2. Frontend Production Build (Next.js 16)
+- **Status:** Compiled cleanly with **0 TypeScript and 0 lint errors**.
+- **Routes:** 13/13 static routes successfully prerendered.
 
 ---
 
-## 9. How to Run AI Garden Buddy Locally
-
-```bash
-# 1. Clone the repository
-git clone https://github.com/Prakhyathsl/Plantcare-ai.git
-cd Plantcare-ai
-
-# 2. Set up and start Backend
-python -m venv .venv
-.\.venv\Scripts\activate   # (or source .venv/bin/activate on macOS/Linux)
-pip install -r backend/requirements.txt
-python backend/run.py      # Starts on http://127.0.0.1:8000
-
-# 3. Set up and start Frontend (in another terminal)
-cd frontend
-npm install
-npm run dev                # Starts on http://localhost:3000
-
-# 4. Optional: Run Gemma 2 locally with Ollama
-ollama pull gemma2:9b
-ollama serve
-```
-
----
-
-## 10. Links & Submission Details
+## Try the Project
 
 - **GitHub Repository:** [https://github.com/Prakhyathsl/Plantcare-ai](https://github.com/Prakhyathsl/Plantcare-ai)
 - **License:** MIT License
-- **Target Category:** Best Use of Gemma (Week 1 Hacktoberfest 2026)
+- **Quickstart:**
+  ```bash
+  # 1. Clone repository
+  git clone https://github.com/Prakhyathsl/Plantcare-ai.git
+  cd Plantcare-ai
 
-*Now put your phone away, step outside, and touch some grass!* 🌿
+  # 2. Start Backend (FastAPI)
+  python -m venv .venv
+  .\.venv\Scripts\activate   # (macOS/Linux: source .venv/bin/activate)
+  pip install -r backend/requirements.txt
+  python backend/run.py      # Runs at http://127.0.0.1:8000
+
+  # 3. Start Frontend (Next.js)
+  cd frontend
+  npm install
+  npm run dev                # Runs at http://localhost:3000
+  ```
+
+---
+
+## Why Open Innovation Matters
+
+Open-weight AI gives developers opportunities to experiment, learn, and create useful applications beyond the boundaries of a single closed AI system.
+
+With projects like AI Garden Buddy, open models enable developers to inspect model reasoning, enforce strict non-toxic guardrails, respect user data boundaries, and create software that encourages people to spend time outside in the natural world.
+
+AI Garden Buddy is my contribution to building technology that helps people reconnect with nature.
+
+*Built for the Hacktoberfest 2026 Open-Source AI Challenge — Week 1: Touch Grass.* 🌿

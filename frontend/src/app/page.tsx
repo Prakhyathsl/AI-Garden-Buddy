@@ -22,11 +22,6 @@ export default function LandingPage() {
       {/* Hero Section */}
       <section className="rounded-3xl bg-[#1b4332] text-white p-8 sm:p-14 shadow-lg border border-[#2d6a4f]/40">
         <div className="max-w-3xl space-y-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 text-xs font-medium text-[#74c69d]">
-            <Sparkles className="w-3.5 h-3.5" />
-            Hacktoberfest 2026 — Best Use of Gemma
-          </div>
-
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
             Grow smarter. <br />
             Waste less. <br />
@@ -34,8 +29,9 @@ export default function LandingPage() {
           </h1>
 
           <p className="text-lg sm:text-xl text-[#cad2c5] leading-relaxed max-w-2xl font-light">
-            A practical, privacy-conscious garden companion powered by Google&apos;s open-weight <strong>Gemma</strong> models.
-            Personalized weekly planting schedules and diagnostic care designed to help you spend less time on screens and more time in nature.
+            A practical, privacy-conscious garden companion designed to help you care for living plants,
+            reduce waste, and spend more time outside. Personalized weekly schedules and diagnostic care
+            crafted for small spaces, balconies, and home gardens.
           </p>
 
           <div className="flex flex-wrap items-center gap-4 pt-4">
@@ -60,7 +56,7 @@ export default function LandingPage() {
           <div className="pt-6 flex flex-wrap items-center gap-6 text-xs text-[#cad2c5]/80 border-t border-white/15">
             <div className="flex items-center gap-1.5">
               <ShieldCheck className="w-4 h-4 text-[#74c69d]" />
-              <span>Google AI Studio or local Ollama</span>
+              <span>Personalized garden intelligence</span>
             </div>
             <div className="flex items-center gap-1.5">
               <Sun className="w-4 h-4 text-[#dda15e]" />
@@ -81,9 +77,9 @@ export default function LandingPage() {
             <div className="w-10 h-10 rounded-xl bg-[#e8f5e9] text-[#1b4332] flex items-center justify-center">
               <Compass className="w-5 h-5 text-[#2d6a4f]" />
             </div>
-            <h3 className="text-lg font-bold text-[#1b4332]">Context-Aware Reasoning</h3>
+            <h3 className="text-lg font-bold text-[#1b4332]">Context-Aware Planning</h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              Gemma evaluates your specific balcony orientation, container depth, daily sunlight, and time budget before proposing a single seed.
+              Our planner evaluates your specific balcony orientation, container depth, daily sunlight, and time budget before proposing a single seed.
             </p>
           </div>
           <div className="pt-4 text-xs font-semibold text-[#2d6a4f]">
@@ -98,7 +94,7 @@ export default function LandingPage() {
             </div>
             <h3 className="text-lg font-bold text-[#1b4332]">Screen-Free Outdoor Missions</h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              Every day features a dedicated &ldquo;Touch Grass&rdquo; activity. Review the instructions in 30 seconds, step outside, and connect with living plants.
+              Every day features a dedicated outdoor sensory activity. Review the instructions in 30 seconds, step outside, and connect with living plants.
             </p>
           </div>
           <div className="pt-4 text-xs font-semibold text-[#bc6c25]">
@@ -109,15 +105,15 @@ export default function LandingPage() {
         <div className="garden-card p-6 flex flex-col justify-between">
           <div className="space-y-3">
             <div className="w-10 h-10 rounded-xl bg-[#f0f4f8] text-[#1e3a8a] flex items-center justify-center">
-              <Cpu className="w-5 h-5 text-[#1e3a8a]" />
+              <ShieldCheck className="w-5 h-5 text-[#1e3a8a]" />
             </div>
-            <h3 className="text-lg font-bold text-[#1b4332]">Open-Weight AI Control</h3>
+            <h3 className="text-lg font-bold text-[#1b4332]">Privacy & Local Control</h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              Auditable and private. Powered by Google&apos;s Gemma weights, running locally or on cloud endpoints without proprietary lock-in.
+              Your home layout, balcony floor plans, plant health notes, and daily schedules are stored safely in your browser. We never track your personal living space.
             </p>
           </div>
           <div className="pt-4 text-xs font-semibold text-[#1e3a8a]">
-            Transparent & reproducible
+            Private & client-side stored
           </div>
         </div>
       </section>
@@ -134,7 +130,7 @@ export default function LandingPage() {
             </h2>
             <p className="text-sm text-gray-600 leading-relaxed">
               Calibrated for tropical maritime conditions: 4 hours of morning sun, high humidity, and 6 containers. 
-              Gemma proposes companion planting Holy Basil (Tulsi), Spearmint (Pudina), and French Marigolds 
+              Our assistant proposes companion planting Holy Basil (Tulsi), Spearmint (Pudina), and French Marigolds 
               to balance culinary yield with natural pest resistance.
             </p>
             <div className="flex flex-wrap gap-2 pt-2">
@@ -167,7 +163,7 @@ export default function LandingPage() {
         <div className="text-center max-w-2xl mx-auto space-y-2">
           <h2 className="text-3xl font-bold text-[#1b4332]">How AI Garden Buddy Works</h2>
           <p className="text-sm text-gray-600">
-            A reliable 4-step workflow pairing open-weight language reasoning with verified botanical science.
+            A reliable 4-step workflow pairing contextual intelligence with verified botanical science.
           </p>
         </div>
 
@@ -186,9 +182,9 @@ export default function LandingPage() {
             <span className="w-8 h-8 rounded-full bg-[#2d6a4f] text-white font-bold text-sm flex items-center justify-center">
               2
             </span>
-            <h4 className="font-bold text-[#1b4332]">Gemma Synthesizes Plan</h4>
+            <h4 className="font-bold text-[#1b4332]">Personalized Plan Created</h4>
             <p className="text-xs text-gray-600 leading-relaxed">
-              Gemma analyzes weather forecasts, seasons, and microclimates into a structured 7-day plan.
+              Weather forecasts, seasons, and local microclimates are analyzed into a structured 7-day schedule.
             </p>
           </div>
 
@@ -219,7 +215,7 @@ export default function LandingPage() {
         <div className="space-y-1 text-center md:text-left">
           <h3 className="text-2xl font-bold">Ready to get started?</h3>
           <p className="text-sm text-[#cad2c5]">
-            Generate a personalized 7-day plan in seconds using open-weight Gemma intelligence.
+            Generate a personalized 7-day plan in seconds tailored to your balcony or garden space.
           </p>
         </div>
         <div className="flex flex-wrap gap-3">

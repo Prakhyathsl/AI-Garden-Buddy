@@ -144,7 +144,7 @@ export default function TasksPage() {
           <div className="space-y-1">
             <h3 className="font-bold text-[#1b4332] text-lg">No active garden plan found</h3>
             <p className="text-xs text-gray-500">
-              Generate your personalized weekly plan with Gemma to unlock your 7-day outdoor calendar.
+              Generate your personalized weekly plan to unlock your 7-day outdoor calendar.
             </p>
           </div>
           <Link

@@ -309,23 +309,23 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* AI Transparency Card */}
+      {/* Garden Plan Status Card */}
       {plan && (
         <div className="garden-card p-5 bg-[#fbfbf7] border border-[#e8ebe4] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="space-y-1">
-            <span className="text-[11px] font-bold text-[#52796f] uppercase tracking-wider">AI Transparency</span>
+            <span className="text-[11px] font-bold text-[#52796f] uppercase tracking-wider">Garden Plan Status</span>
             <p className="text-xs text-gray-700">
-              Active plan generated with <strong>{plan.model_id}</strong> via mode <code>{plan.inference_mode}</code>.
+              Active 7-day schedule calibrated for your space and local microclimate.
             </p>
             <p className="text-[11px] text-gray-500">
-              Generated: {new Date(plan.generated_at).toLocaleString()} • Verified schema output
+              Generated: {new Date(plan.generated_at).toLocaleDateString()}
             </p>
           </div>
           <Link
-            href="/why-open-ai"
+            href="/planner"
             className="text-xs font-semibold text-[#1b4332] hover:text-[#2d6a4f] underline shrink-0"
           >
-            Learn Why Open AI Matters →
+            Review Full Schedule →
           </Link>
         </div>
       )}

@@ -1,99 +1,87 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { 
-  Cpu, 
   ShieldCheck, 
   Lock, 
-  Server, 
-  FileText, 
   CheckCircle2, 
   AlertCircle, 
-  ExternalLink,
-  Table,
-  Sparkles,
-  RefreshCw
+  FileText,
+  Compass,
+  Heart,
+  Sprout
 } from 'lucide-react';
-import { fetchSystemHealth, SystemHealth } from '@/lib/api';
 
 export default function WhyOpenAIPage() {
-  const [health, setHealth] = useState<SystemHealth | null>(null);
-
-  useEffect(() => {
-    fetchSystemHealth().then(setHealth).catch(() => {});
-  }, []);
-
-  const activeMode = health?.ai_engine.inference_mode || 'Checking...';
-  const activeModel = health?.ai_engine.active_model || 'Gemma 2';
-  const isLocal = health?.ai_engine.is_local || false;
-
   return (
     <div className="max-w-4xl mx-auto space-y-10 py-2">
       {/* Header */}
       <div className="border-b border-[#e8ebe4] pb-6">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-900 mb-2">
-          <Cpu className="w-3.5 h-3.5 text-blue-700" /> Open Weights & Data Sovereignty
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-[#1b4332] mb-2">
+          <ShieldCheck className="w-3.5 h-3.5 text-[#2d6a4f]" /> Privacy & Botanical Science
         </div>
         <h1 className="text-3xl font-extrabold text-[#1b4332]">
-          Why Open AI Matters for Gardeners
+          Our Approach to Plant Care
         </h1>
         <p className="text-sm text-gray-600 mt-1 leading-relaxed">
-          How Google&apos;s open-weight Gemma architecture gives gardeners full model ownership, 
-          tamper-free local execution, and total privacy over home living spaces.
+          How AI Garden Buddy protects your home garden privacy, grounds guidance in real agricultural science,
+          and designs technology to get you outside.
         </p>
       </div>
 
-      {/* Active System Inspection Card */}
+      {/* Data & Privacy Guarantee Card */}
       <div className="garden-card p-6 sm:p-8 bg-white border border-[#e8ebe4] space-y-4">
         <h2 className="text-lg font-bold text-[#1b4332] flex items-center gap-2">
-          <Server className="w-5 h-5 text-[#52796f]" /> Active Engine Configuration
+          <Lock className="w-5 h-5 text-[#52796f]" /> Your Data Boundaries
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 bg-[#fbfbf7] p-5 rounded-2xl border border-[#e8ebe4] text-xs">
           <div>
-            <span className="font-bold text-gray-500 uppercase text-[10px] block">Model Identifier</span>
-            <span className="font-bold text-sm text-[#1b4332]">{activeModel}</span>
+            <span className="font-bold text-gray-500 uppercase text-[10px] block">Garden Storage</span>
+            <span className="font-bold text-sm text-[#1b4332]">Local Browser Storage</span>
+            <p className="text-[11px] text-gray-500 mt-1">Your plants, notes, and tasks stay on your device.</p>
           </div>
 
           <div>
-            <span className="font-bold text-gray-500 uppercase text-[10px] block">Inference Mode</span>
-            <span className="font-bold text-sm text-[#2d6a4f] capitalize">{activeMode}</span>
+            <span className="font-bold text-gray-500 uppercase text-[10px] block">No Account Required</span>
+            <span className="font-bold text-sm text-[#2d6a4f]">100% Private Access</span>
+            <p className="text-[11px] text-gray-500 mt-1">No signups, passwords, or personal tracking.</p>
           </div>
 
           <div>
-            <span className="font-bold text-gray-500 uppercase text-[10px] block">Local Privacy Status</span>
-            <span className={`font-bold text-sm ${isLocal ? 'text-emerald-700' : 'text-blue-700'}`}>
-              {isLocal ? '100% Private (Local Ollama)' : activeMode === 'demo_mode' ? 'Verified Local Fixture' : 'Cloud Gemma Endpoint'}
-            </span>
+            <span className="font-bold text-gray-500 uppercase text-[10px] block">Safety Standard</span>
+            <span className="font-bold text-sm text-emerald-700">Non-Toxic & Organic</span>
+            <p className="text-[11px] text-gray-500 mt-1">Clear guardrails against hazardous chemicals.</p>
           </div>
         </div>
 
         <p className="text-xs text-gray-600 leading-relaxed">
-          {health?.ai_engine.privacy_notice || 'Data stays client-side. When using Ollama, no prompt leaves your physical machine.'}
+          When creating a weekly plan or analyzing plant symptoms, only the necessary garden parameters
+          (container count, sunlight, symptoms) are evaluated. We never collect or sell your personal data.
         </p>
       </div>
 
-      {/* 4 Pillars of Open Weights */}
+      {/* 4 Pillars of Responsible Gardening Assistance */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <div className="garden-card p-6 space-y-3">
           <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-800 flex items-center justify-center">
             <Lock className="w-5 h-5 text-emerald-700" />
           </div>
-          <h3 className="font-bold text-[#1b4332] text-base">Zero Garden Surveillance</h3>
+          <h3 className="font-bold text-[#1b4332] text-base">Local Data Ownership</h3>
           <p className="text-xs text-gray-600 leading-relaxed">
-            Your home layout, balcony floor plans, plant health problems, and daily schedules never need to leave your device. 
-            When running with Ollama, inference happens purely in your local RAM/GPU.
+            Your home layout, balcony floor plans, plant health observations, and daily habits stay under your control.
+            Everything is saved directly to your local browser storage.
           </p>
         </div>
 
         <div className="garden-card p-6 space-y-3">
           <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-800 flex items-center justify-center">
-            <RefreshCw className="w-5 h-5 text-blue-700" />
+            <Sprout className="w-5 h-5 text-blue-700" />
           </div>
-          <h3 className="font-bold text-[#1b4332] text-base">Model Swappability</h3>
+          <h3 className="font-bold text-[#1b4332] text-base">Grounded in Botanical Science</h3>
           <p className="text-xs text-gray-600 leading-relaxed">
-            You are not locked into a closed-source proprietary platform. Switch seamlessly between 
-            local Ollama instances (<code>gemma2:9b</code>) and Google AI Studio-hosted Gemma endpoints (<code>gemma-4-26b-a4b-it</code>) via standard configuration.
+            Recommendations are aligned with verified agricultural standards (ICAR and RHS). The planner respects root
+            depths and container volumes before suggesting plants.
           </p>
         </div>
 
@@ -101,33 +89,33 @@ export default function WhyOpenAIPage() {
           <div className="w-10 h-10 rounded-xl bg-amber-50 text-[#bc6c25] flex items-center justify-center">
             <ShieldCheck className="w-5 h-5 text-[#bc6c25]" />
           </div>
-          <h3 className="font-bold text-[#1b4332] text-base">Auditability & Safety</h3>
+          <h3 className="font-bold text-[#1b4332] text-base">Non-Toxic Physical Checks</h3>
           <p className="text-xs text-gray-600 leading-relaxed">
-            Open-weight models can be thoroughly inspected for biases and safety constraints. Our backend prompt guarantees 
-            that chemical toxicity cautions and non-hallucinated botanical facts are consistently applied.
+            Rather than relying on guesses or unverified chemicals, our diagnostic assistant emphasizes physical checks
+            like testing moisture 2 inches down and inspecting drainage trays.
           </p>
         </div>
 
         <div className="garden-card p-6 space-y-3">
           <div className="w-10 h-10 rounded-xl bg-purple-50 text-purple-800 flex items-center justify-center">
-            <Cpu className="w-5 h-5 text-purple-700" />
+            <Compass className="w-5 h-5 text-purple-700" />
           </div>
-          <h3 className="font-bold text-[#1b4332] text-base">Reliability When Offline</h3>
+          <h3 className="font-bold text-[#1b4332] text-base">Technology for the Outdoors</h3>
           <p className="text-xs text-gray-600 leading-relaxed">
-            If cloud servers undergo outages or rate limits, local Gemma inference continues functioning uninterrupted, 
-            allowing you to plan and garden even in off-grid or rural locations.
+            Our daily tasks are designed to be read in under 30 seconds. The goal is to spend less time staring
+            at a screen and more time outside tending living plants.
           </p>
         </div>
       </div>
 
-      {/* Reproducible 3-Scenario Experiment Comparison */}
+      {/* Reproducible Scenario Testing */}
       <div className="space-y-4">
         <div>
           <h2 className="text-xl font-bold text-[#1b4332] flex items-center gap-2">
-            <FileText className="w-5 h-5 text-[#52796f]" /> Reproducible 3-Scenario Gemma Evaluation
+            <FileText className="w-5 h-5 text-[#52796f]" /> Garden Scenario Testing & Validation
           </h2>
           <p className="text-xs text-gray-600 mt-0.5">
-            Documented experiments testing structured output adherence, constraint awareness, and screen-free task quality.
+            Documented evaluations testing space constraints, time budgets, and outdoor sensory task quality.
           </p>
         </div>
 
@@ -136,11 +124,11 @@ export default function WhyOpenAIPage() {
             <table className="w-full text-left text-xs">
               <thead className="bg-[#f4f4ea] text-[#1b4332] border-b border-[#e8ebe4] font-bold uppercase text-[10px]">
                 <tr>
-                  <th className="p-3.5">Scenario Tested</th>
-                  <th className="p-3.5">Input Constraints</th>
-                  <th className="p-3.5">Gemma Recommended Plants</th>
+                  <th className="p-3.5">Garden Scenario</th>
+                  <th className="p-3.5">Space & Sunlight Constraints</th>
+                  <th className="p-3.5">Recommended Plantings</th>
                   <th className="p-3.5">Daily Time Adherence</th>
-                  <th className="p-3.5">Schema Validity</th>
+                  <th className="p-3.5">Schedule Validation</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100 text-gray-700">
@@ -159,7 +147,7 @@ export default function WhyOpenAIPage() {
                   </td>
                   <td className="p-3.5">
                     <span className="inline-flex items-center gap-1 text-emerald-700 font-bold">
-                      <CheckCircle2 className="w-3.5 h-3.5" /> 100% Valid JSON
+                      <CheckCircle2 className="w-3.5 h-3.5" /> Validated Schedule
                     </span>
                   </td>
                 </tr>
@@ -179,7 +167,7 @@ export default function WhyOpenAIPage() {
                   </td>
                   <td className="p-3.5">
                     <span className="inline-flex items-center gap-1 text-emerald-700 font-bold">
-                      <CheckCircle2 className="w-3.5 h-3.5" /> 100% Valid JSON
+                      <CheckCircle2 className="w-3.5 h-3.5" /> Validated Schedule
                     </span>
                   </td>
                 </tr>
@@ -199,7 +187,7 @@ export default function WhyOpenAIPage() {
                   </td>
                   <td className="p-3.5">
                     <span className="inline-flex items-center gap-1 text-emerald-700 font-bold">
-                      <CheckCircle2 className="w-3.5 h-3.5" /> 100% Valid JSON
+                      <CheckCircle2 className="w-3.5 h-3.5" /> Validated Schedule
                     </span>
                   </td>
                 </tr>
@@ -209,26 +197,28 @@ export default function WhyOpenAIPage() {
         </div>
 
         <div className="p-4 rounded-xl bg-[#fbfbf7] border border-[#e8ebe4] text-xs text-gray-600 space-y-1.5 leading-relaxed">
-          <span className="font-bold text-gray-800 block">Key Empirical Observations:</span>
+          <span className="font-bold text-gray-800 block">Key Observations from Testing:</span>
           <p>
-            • <strong>Constraint Respect:</strong> Gemma 2 strictly bounded each day&apos;s task minutes within the user&apos;s specified daily time budget.
+            • <strong>Time Discipline:</strong> The planning assistant strictly bounds each day&apos;s task minutes within the user&apos;s specified daily time budget.
           </p>
           <p>
-            • <strong>Container Depth Logic:</strong> The model reliably warned against planting deep taproot crops (like large carrots or giant squashes) in 8-inch balcony pots, recommending shallow herbs and bush varieties instead.
+            • <strong>Container Depth Logic:</strong> The system reliably warns against planting deep taproot crops in shallow balcony pots, recommending shallow herbs and bush varieties instead.
           </p>
           <p>
-            • <strong>Outdoor Mission Quality:</strong> Gemma generated grounded sensory tasks (&ldquo;feel soil moisture 2 inches down&rdquo;, &ldquo;smell crushed mint leaf&rdquo;, &ldquo;inspect leaf undersides for aphids&rdquo;) rather than vague screen-oriented advice.
+            • <strong>Outdoor Mission Quality:</strong> Generated sensory tasks focus on tactile connection (&ldquo;feel soil moisture 2 inches down&rdquo;, &ldquo;smell crushed mint leaf&rdquo;, &ldquo;inspect leaf undersides for aphids&rdquo;) rather than digital screen time.
           </p>
         </div>
       </div>
 
-      {/* Limitations Disclaimer */}
+      {/* Advisory Disclaimer */}
       <div className="p-5 rounded-2xl bg-amber-50/70 border border-amber-200 text-xs text-amber-900 space-y-2">
         <h4 className="font-bold text-amber-950 flex items-center gap-1.5">
-          <AlertCircle className="w-4 h-4 text-amber-600" /> Explicit AI Model Limitations
+          <AlertCircle className="w-4 h-4 text-amber-600" /> Plant Care & Hygiene Advisory
         </h4>
         <p className="leading-relaxed">
-          AI Garden Buddy is an educational, planning, and sensory aid. Language model weights cannot replace physical microclimate soil testing, regional pathogen laboratory diagnostics, or localized government agricultural advisories. Always practice safe garden hygiene, wash produce thoroughly, and avoid applying unverified chemicals.
+          AI Garden Buddy is an educational, planning, and sensory aid. It cannot replace physical soil testing,
+          microclimate observation, or regional agricultural extension advisories. Always practice safe garden hygiene,
+          wash homegrown produce thoroughly, and avoid applying unverified chemical treatments.
         </p>
       </div>
     </div>

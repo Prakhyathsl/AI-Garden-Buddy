@@ -34,42 +34,34 @@ export default function Navbar() {
     { href: '/tasks', label: 'Tasks', icon: CheckSquare },
     { href: '/health', label: 'Plant Health', icon: Stethoscope },
     { href: '/journal', label: 'Journal', icon: Calendar },
-    { href: '/why-open-ai', label: 'Why Open AI', icon: Cpu },
+    { href: '/why-open-ai', label: 'Privacy & Science', icon: ShieldCheck },
     { href: '/profile', label: 'Profile', icon: Settings },
   ];
 
   const getInferenceBadge = () => {
     if (!health) {
       return (
-        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-amber-50 text-amber-800 border border-amber-200">
-          <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
-          Connecting AI...
+        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-stone-100 text-stone-600 border border-stone-200">
+          <span className="w-1.5 h-1.5 rounded-full bg-stone-400"></span>
+          Plant Assistant
         </span>
       );
     }
     const mode = health.ai_engine.inference_mode;
-    if (mode === 'ollama_local') {
+    if (mode === 'demo_mode') {
       return (
-        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-50 text-emerald-800 border border-emerald-200" title="Private local inference via Ollama">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-          Gemma (Local Ollama)
-        </span>
-      );
-    } else if (mode.includes('api')) {
-      return (
-        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-800 border border-blue-200" title={`Inference via ${mode}`}>
-          <span className="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
-          {health.ai_engine.active_model}
-        </span>
-      );
-    } else {
-      return (
-        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-stone-100 text-stone-700 border border-stone-300" title="Offline demo fixture active">
+        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-stone-100 text-stone-700 border border-stone-300" title="Sample demonstration mode active">
           <span className="w-1.5 h-1.5 rounded-full bg-stone-400"></span>
-          Sample Demo Mode
+          Sample Mode
         </span>
       );
     }
+    return (
+      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-50 text-emerald-800 border border-emerald-200">
+        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+        Assistant Active
+      </span>
+    );
   };
 
   return (

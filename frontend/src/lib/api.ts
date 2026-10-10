@@ -29,7 +29,7 @@ export async function fetchSystemHealth(): Promise<SystemHealth> {
       app_name: 'AI Garden Buddy API',
       app_version: '1.0.0',
       ai_engine: {
-        model_family: 'Google Gemma Open-Weights',
+        model_family: 'Garden Intelligence Engine',
         active_model: 'Backend Unreachable',
         inference_mode: 'offline',
         is_local: false,

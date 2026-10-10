@@ -49,7 +49,7 @@ export default function PlannerPage() {
     const steps = [
       'Retrieving live meteorological context from Open-Meteo...',
       'Synthesizing space, container depth, and sunlight parameters...',
-      'Running Google Gemma 2 open-weight inference...',
+      'Synthesizing tailored plant and space recommendations...',
       'Validating structured 7-day schedule and outdoor missions...',
     ];
 
@@ -93,11 +93,11 @@ export default function PlannerPage() {
         <div>
           <div className="flex items-center gap-2">
             <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-[#1b4332]">
-              <Sparkles className="w-3.5 h-3.5 text-[#2d6a4f]" /> Powered by Gemma
+              <Sparkles className="w-3.5 h-3.5 text-[#2d6a4f]" /> Tailored Garden Intelligence
             </span>
           </div>
           <h1 className="text-3xl font-extrabold text-[#1b4332] mt-1">
-            AI Weekly Garden Planner
+            Weekly Garden Planner
           </h1>
           <p className="text-sm text-gray-600 mt-1">
             Generates a structured 7-day schedule with daily screen-free outdoor missions tailored to your space.
@@ -174,7 +174,7 @@ export default function PlannerPage() {
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#1b4332] text-white text-sm font-bold hover:bg-[#2d6a4f] disabled:opacity-50 shadow-md transition-all"
             >
               <Sparkles className={`w-4 h-4 text-[#74c69d] ${loading ? 'animate-spin' : ''}`} />
-              {loading ? 'Synthesizing with Gemma...' : plan ? 'Regenerate 7-Day Plan' : 'Generate 7-Day Plan'}
+              {loading ? 'Creating Your Plan...' : plan ? 'Regenerate 7-Day Plan' : 'Generate 7-Day Plan'}
             </button>
 
             <button
@@ -216,13 +216,13 @@ export default function PlannerPage() {
         <div className="p-6 rounded-2xl bg-amber-50/80 border border-amber-200 text-amber-950 space-y-3">
           <div className="flex items-center gap-2">
             <AlertCircle className="w-5 h-5 text-amber-600" />
-            <h3 className="text-sm font-bold">Gemma Inference Service Unavailable</h3>
+            <h3 className="text-sm font-bold">Planning Service Temporarily Unavailable</h3>
           </div>
           <p className="text-xs leading-relaxed text-amber-900 bg-white/70 p-3 rounded-lg border border-amber-200 font-mono">
             {error}
           </p>
           <p className="text-xs text-amber-800">
-            To enable real-time inference, ensure <code>GEMINI_API_KEY</code> is configured in <code>.env</code> (Google AI Studio) or start local Ollama.
+            The planning assistant is taking longer than expected or is temporarily unreachable. You can retry in a moment or preview a sample garden plan.
           </p>
           <div className="pt-1">
             <button
@@ -238,11 +238,11 @@ export default function PlannerPage() {
       {/* Plan Render Output */}
       {plan && !loading && (
         <div className="space-y-8">
-          {/* Summary & Transparency Header */}
+          {/* Summary & Status Header */}
           <div className="garden-card p-6 sm:p-8 bg-white border border-[#e8ebe4] space-y-4">
             <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#f0f2ed] pb-3">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold badge-gemma">
-                Model: {plan.model_id} ({plan.inference_mode})
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#e8f5e9] text-[#1b4332] border border-[#c8e6c9]">
+                <Check className="w-3.5 h-3.5 text-[#2d6a4f]" /> Custom 7-Day Schedule
               </span>
               <span className="text-xs text-gray-500">
                 Generated: {new Date(plan.generated_at).toLocaleDateString()}

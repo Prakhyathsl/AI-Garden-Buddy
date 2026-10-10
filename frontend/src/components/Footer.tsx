@@ -16,12 +16,11 @@ export default function Footer() {
               <span className="text-xl font-bold text-white tracking-tight">AI Garden Buddy</span>
             </div>
             <p className="text-sm text-[#cad2c5]/80 max-w-md leading-relaxed">
-              <strong>Grow smarter. Waste less. Get outside.</strong> A privacy-first, open-weight gardening assistant built for 
-              Hacktoberfest 2026 Week 1, powered by Google's open-weight Gemma 2 model.
+              <strong>Grow smarter. Waste less. Get outside.</strong> A practical, privacy-conscious gardening companion designed to help you care for living plants and build healthy outdoor habits.
             </p>
             <div className="flex items-center gap-2 text-xs text-[#cad2c5]/70 pt-2">
               <Shield className="w-4 h-4 text-[#74c69d]" />
-              <span>Zero telemetry. Local inference supported. Your garden data stays on your machine.</span>
+              <span>Private client-side storage. Your garden data stays on your device.</span>
             </div>
           </div>
 
@@ -31,7 +30,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               <li>
                 <Link href="/planner" className="hover:text-white transition-colors">
-                  AI Weekly Planner
+                  Weekly Garden Planner
                 </Link>
               </li>
               <li>
@@ -57,29 +56,19 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Col 3: Open Source & Hackathon */}
+          {/* Col 3: About & Privacy */}
           <div>
-            <h4 className="text-sm font-semibold uppercase tracking-wider text-white mb-4">Open AI Rationale</h4>
+            <h4 className="text-sm font-semibold uppercase tracking-wider text-white mb-4">About & Principles</h4>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link href="/why-open-ai" className="hover:text-white transition-colors flex items-center gap-1.5">
-                  Why Open AI?
+                  Privacy & Science
                 </Link>
               </li>
               <li>
                 <Link href="/about" className="hover:text-white transition-colors">
-                  About Hacktoberfest 2026
+                  About AI Garden Buddy
                 </Link>
-              </li>
-              <li>
-                <a 
-                  href="https://github.com/google-deepmind/gemma" 
-                  target="_blank" 
-                  rel="noreferrer" 
-                  className="hover:text-white transition-colors inline-flex items-center gap-1 text-xs text-[#74c69d]"
-                >
-                  Google Gemma Model <ExternalLink className="w-3 h-3" />
-                </a>
               </li>
               <li>
                 <span className="text-xs text-[#84a98c]">Open Source under MIT License</span>
@@ -89,9 +78,9 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-[#2d6a4f]/60 mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-[#84a98c]">
-          <p>© 2026 AI Garden Buddy. Crafted with open-weight Gemma for gardeners everywhere.</p>
+          <p>© 2026 AI Garden Buddy. Grow smarter. Waste less. Get outside.</p>
           <p className="mt-2 sm:mt-0 flex items-center gap-1">
-            <span>Remember to Touch Grass today! 🌿</span>
+            <span>Step outside and connect with nature. 🌿</span>
           </p>
         </div>
       </div>

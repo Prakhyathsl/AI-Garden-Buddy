@@ -93,7 +93,7 @@ export default function HealthPage() {
       {/* Header */}
       <div className="border-b border-[#e8ebe4] pb-6">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-[#1b4332] mb-2">
-          <Sparkles className="w-3.5 h-3.5 text-[#2d6a4f]" /> Powered by Gemma
+          <Sparkles className="w-3.5 h-3.5 text-[#2d6a4f]" /> Botanical Diagnostic Engine
         </div>
         <h1 className="text-3xl font-extrabold text-[#1b4332] flex items-center gap-2">
           <Stethoscope className="w-8 h-8 text-[#52796f]" /> Plant Health Assistant
@@ -243,7 +243,7 @@ export default function HealthPage() {
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#1b4332] text-white text-sm font-bold hover:bg-[#2d6a4f] disabled:opacity-50 transition-all shadow-md"
             >
               <Sparkles className={`w-4 h-4 text-[#74c69d] ${loading ? 'animate-spin' : ''}`} />
-              {loading ? 'Evaluating with Gemma...' : 'Analyze Plant Health'}
+              {loading ? 'Evaluating Symptoms...' : 'Analyze Plant Health'}
             </button>
 
             <button
@@ -262,10 +262,10 @@ export default function HealthPage() {
       {error && !loading && (
         <div className="p-5 rounded-2xl bg-amber-50/80 border border-amber-200 text-amber-950 text-xs space-y-2">
           <p className="font-bold flex items-center gap-1.5 text-amber-900">
-            <AlertTriangle className="w-4 h-4 text-amber-600" /> Assessment Service Unavailable
+            <AlertTriangle className="w-4 h-4 text-amber-600" /> Assessment Service Temporarily Unavailable
           </p>
           <p className="font-mono text-[11px] bg-white/70 p-2.5 rounded-lg border border-amber-200">{error}</p>
-          <p className="text-amber-800">Verify your <code>GEMINI_API_KEY</code> in <code>.env</code> or load the sample diagnostic case above.</p>
+          <p className="text-amber-800">The health assessment service is taking longer than expected or is temporarily unreachable. You can retry in a moment or explore the sample diagnostic case above.</p>
         </div>
       )}
 
@@ -283,8 +283,8 @@ export default function HealthPage() {
                 </p>
               </div>
 
-              <span className="badge-gemma px-3 py-1 rounded-full text-xs font-semibold">
-                Engine: {result.model_id} ({result.inference_mode})
+              <span className="px-3 py-1 rounded-full text-xs font-semibold bg-[#e8f5e9] text-[#1b4332] border border-[#c8e6c9]">
+                Symptom Analysis Complete
               </span>
             </div>
 

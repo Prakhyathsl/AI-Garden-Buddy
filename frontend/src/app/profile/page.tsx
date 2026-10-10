@@ -128,7 +128,7 @@ export default function ProfilePage() {
           <Settings className="w-7 h-7 text-[#52796f]" /> Garden Profile & Space Settings
         </h1>
         <p className="text-sm text-gray-600 mt-1">
-          Customize your real microclimate and constraints. Gemma uses these exact parameters to generate grounded plans.
+          Customize your microclimate and space constraints. Your weekly planner uses these parameters to generate grounded schedules.
         </p>
       </div>
 
@@ -320,7 +320,7 @@ export default function ProfilePage() {
               className="w-full accent-[#2d6a4f] cursor-pointer"
             />
             <p className="text-xs text-gray-500 mt-1">
-              Gemma enforces that daily task schedules fit inside this exact window.
+              Daily task schedules are bounded to fit inside this exact window.
             </p>
           </div>
         </div>

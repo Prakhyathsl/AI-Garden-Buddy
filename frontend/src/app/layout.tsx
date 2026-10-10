@@ -4,9 +4,9 @@ import Footer from "@/components/Footer";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "AI Garden Buddy | Open-Weight Gemma Garden Planner",
-  description: "Grow smarter. Waste less. Get outside. Personalized, practical garden planning and plant health diagnostics powered by Google's open-weight Gemma model.",
-  keywords: ["gardening", "AI garden planner", "Gemma", "open-weight AI", "balcony gardening", "plant care", "Hacktoberfest 2026"],
+  title: "AI Garden Buddy | Intelligent Garden Planner & Plant Health Assistant",
+  description: "Grow smarter. Waste less. Get outside. Practical, personalized garden planning and plant health diagnostics designed for everyday gardeners.",
+  keywords: ["gardening", "garden planner", "plant care", "balcony gardening", "urban gardening", "outdoor habits", "organic plant care"],
   authors: [{ name: "AI Garden Buddy Team" }],
 };
 

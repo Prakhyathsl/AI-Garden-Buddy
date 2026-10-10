@@ -20,6 +20,7 @@ class Settings(BaseModel):
     
     # Cloud Gemma API options (for environments without local GPU/Ollama)
     gemini_api_key: str = os.getenv("GEMINI_API_KEY", "")
+    gemini_model: str = os.getenv("GEMINI_MODEL", "gemma-4-26b-a4b-it")
     groq_api_key: str = os.getenv("GROQ_API_KEY", "")
     huggingface_api_key: str = os.getenv("HUGGINGFACE_API_KEY", "")
     openrouter_api_key: str = os.getenv("OPENROUTER_API_KEY", "")

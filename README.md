@@ -143,14 +143,19 @@ AI Garden Buddy supports three inference modes:
    ```
    The backend automatically discovers Ollama on `http://localhost:11434` and displays `Gemma 2 (Local Ollama)` in the UI.
 
-#### Option B: Cloud Gemma API (Groq / OpenRouter / HuggingFace)
-Copy `.env.example` to `.env` in the backend root and set your API key:
+#### Option B: Google AI Studio (Official Hosted Gemma)
+Copy `.env.example` to `.env` in the project root and configure your Google AI Studio key:
 ```env
-GEMMA_BACKEND=groq
-GROQ_API_KEY=your_groq_api_key_here
+GEMMA_BACKEND=auto
+GEMINI_API_KEY=your_google_ai_studio_api_key_here
+GEMINI_MODEL=gemma-4-26b-a4b-it
 ```
+When `GEMINI_API_KEY` is present and Ollama is not running, the application automatically routes to Google AI Studio's Gemma endpoint (`https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent`) using the `x-goog-api-key` header.
 
-#### Option C: Instant Demo Fixture Mode
+#### Option C: Alternative Cloud Gemma APIs (Groq / OpenRouter / HuggingFace)
+Configure `GROQ_API_KEY`, `OPENROUTER_API_KEY`, or `HUGGINGFACE_API_KEY` in `.env`.
+
+#### Option D: Instant Demo Fixture Mode
 No GPU or API key? Check the **"Use Verified Sample Demo Data"** box in the UI to instantly test and evaluate all features using verified reference fixtures.
 
 ---
@@ -161,12 +166,12 @@ No GPU or API key? Check the **"Use Verified Sample Demo Data"** box in the UI t
 ```bash
 .\.venv\Scripts\pytest.exe backend/tests -v
 ```
-**Results:** `12 passed in 23.38s (100% pass rate)`
+**Results:** `17 passed in 29.54s (100% pass rate)`
 - Validates root and health checks
 - Validates garden profile schema constraints
 - Validates 7-day plan structure and outdoor mission generation
-- Validates model unavailable & timeout error handling
-- Validates malformed JSON handling
+- Validates model unavailable, timeout (504), and malformed output (422) error handling
+- Validates plant health diagnostic assistant and error states
 - Validates plant library search and filtering
 - Validates safe meteorological fallbacks
 

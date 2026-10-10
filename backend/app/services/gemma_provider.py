@@ -78,7 +78,7 @@ class GemmaProvider:
                 active_model = settings.gemma_model
             elif has_gemini:
                 active_mode = "gemini_api"
-                active_model = "gemma-2-27b-it (Google AI Studio)"
+                active_model = f"{settings.gemini_model} (Google AI Studio)"
             elif has_groq:
                 active_mode = "groq_api"
                 active_model = "gemma2-9b-it (Groq)"
@@ -94,6 +94,9 @@ class GemmaProvider:
             else:
                 active_mode = "demo_mode"
                 active_model = "gemma-2-9b-it (sample demo fixture)"
+        elif backend_choice in ("gemini", "gemini_api", "google", "google_ai_studio"):
+            active_mode = "gemini_api"
+            active_model = f"{settings.gemini_model} (Google AI Studio)"
         else:
             active_mode = backend_choice
             active_model = settings.gemma_model
@@ -173,11 +176,15 @@ class GemmaProvider:
         # 1b. Google AI Studio Gemma endpoint (Official Google API)
         if active_mode == "gemini_api":
             try:
-                endpoint = f"https://generativelanguage.googleapis.com/v1beta/models/gemma-2-27b-it:generateContent?key={settings.gemini_api_key}"
+                endpoint = f"https://generativelanguage.googleapis.com/v1beta/models/{settings.gemini_model}:generateContent"
+                headers = {
+                    "Content-Type": "application/json",
+                    "x-goog-api-key": settings.gemini_api_key,
+                }
                 async with httpx.AsyncClient(timeout=settings.inference_timeout_seconds) as client:
                     resp = await client.post(
                         endpoint,
-                        headers={"Content-Type": "application/json"},
+                        headers=headers,
                         json={
                             "contents": [
                                 {
@@ -197,7 +204,7 @@ class GemmaProvider:
                     content = data["candidates"][0]["content"]["parts"][0]["text"]
                     clean_text = clean_json_response(content)
                     parsed = json.loads(clean_text)
-                    return parsed, "gemma-2-27b-it (Google AI Studio)", "gemini_api"
+                    return parsed, f"{settings.gemini_model} (Google AI Studio)", "gemini_api"
             except httpx.TimeoutException:
                 raise TimeoutError("Google AI Studio Gemma inference timed out.")
             except Exception as e:

@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+:root {
+  --font-inter: 'Inter', system-ui, -apple-system, sans-serif;
+  --bg-cream: #fbfbf7;
+  --card-cream: #ffffff;
+  --card-border: #e8ebe4;
+  --forest-900: #132a22;
+  --forest-800: #1b4332;
+  --forest-700: #2d6a4f;
+  --forest-600: #40916c;
+  --sage-500: #52796f;
+  --sage-300: #84a98c;
+  --sage-100: #cad2c5;
+  --terracotta-600: #a75225;
+  --terracotta-500: #bc6c25;
+  --terracotta-100: #faedcd;
+  --sun-gold: #dda15e;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: #1f2937;
+  font-family: var(--font-inter);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Botanical Card Styles */
+.garden-card {
+  background: #ffffff;
+  border: 1px solid var(--card-border);
+  border-radius: 1rem;
+  box-shadow: 0 4px 20px -2px rgba(27, 67, 50, 0.05);
+  transition: all 0.2s ease-in-out;
+}
+
+.garden-card:hover {
+  box-shadow: 0 8px 30px -4px rgba(27, 67, 50, 0.08);
+}
+
+.badge-gemma {
+  background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+  color: #1b5e20;
+  border: 1px solid #a5d6a7;
+}
+
+.badge-tag {
+  background: #f0f4f1;
+  color: #2d6a4f;
+  border: 1px solid #d8e2dc;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f3f0;
+}
+::-webkit-scrollbar-thumb {
+  background: #cad2c5;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #84a98c;
+}
